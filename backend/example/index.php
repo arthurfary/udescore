@@ -1,15 +1,15 @@
 <?php
 
 require_once "../api.php";
-require_once "../db.php";
 
 try {
     $api = new Api(); // Inicializa a api
 
-    $api->method("GET"); // Seta qual será o metodo da api
+    $api->method("GET"); // Valida se o método chamado é o correto
 
-    $anime = $api->obterParametro("anime"); // Obtém o valor de um parameter específico da api
-    //$token = $api->obterHeader("Authorization") // Obtém o valor de header específico
+    $parametroValor = $api->obterParametro("parametro"); // Obtém o valor de um parameter específico da api (http://www.udescore/?parametro=1)
+    // Nesse caso a variável parametroValor terá o valor 1
+    $token = $api->obterHeader("Authorization"); // Obtém o valor de um header específico, nesse caso irá trazer o valor do Authorization
 
     $api->sendResponse(
         200, // Código http de retorno
@@ -20,5 +20,5 @@ try {
         ]
     );
 } catch (Exception $e) {
-    $api->tratarException($e); // Trata os erros dos métodos chamados durante a api
+    $api->tratarException($e); // Trata os erros dos métodos chamados durante a execução da api
 }

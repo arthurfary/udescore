@@ -2,6 +2,7 @@
 
 class Api
 {
+    // Método que inicia a api
     function __construct()
     {
         header("Access-Control-Allow-Origin: *");
@@ -18,6 +19,7 @@ class Api
     /**
      * @param string $method
      */
+    // Valida o método da api chamado
     public function method(string $method): void
     {
         if (strtoupper($_SERVER["REQUEST_METHOD"]) !== strtoupper($method)) {
@@ -30,25 +32,19 @@ class Api
      * @param mixed $code
      * @param mixed $data
      */
+    // Escrever mensagem de retorno em JSON
     function sendResponse($code, $data): void
     {
         http_response_code($code);
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
-        $this->end();
+        exit();
     }
 
-    function getJson(): mixed
-    {
-        $data = json_decode(file_get_contents("php://input"), true);
-        if ($data === null) {
-            throw new InvalidArgumentException("Invalid JSON data");
-        }
-        return $data;
-    }
     /**
      * @param mixed $camposObrigatorios
      * @param mixed $data
      */
+    // Valida se todos os campos obrigatórios estão preenchidos
     function validarCamposObrigatoriosBody($camposObrigatorios, $data): void
     {
         $camposFaltando = [];
@@ -64,12 +60,7 @@ class Api
             );
         }
     }
-
-    function end(): void
-    {
-        exit();
-    }
-
+    // Obtém o body da chamada
     function obterBody(): mixed
     {
         $request_body = file_get_contents("php://input");
@@ -86,6 +77,7 @@ class Api
      * @param mixed $parametro
      * @param mixed $obrigatorio
      */
+    // Obtém o valor de um parâmetro específico da API e define se vai ser obrigatório
     function obterParametro($parametro, $obrigatorio = false): string|null
     {
         if (
@@ -103,7 +95,7 @@ class Api
 
         return $_GET[$parametro];
     }
-
+    // Centraliza o tratamento de todas as mensagens de erro das APIs
     public function tratarException(Exception $exception): void
     {
         if ($exception instanceof InvalidArgumentException) {
@@ -121,6 +113,7 @@ class Api
     /**
      * @param mixed $header
      */
+    // Obter o valor de um header específico (Sempre obrigatório)
     public function obterHeader($header): array|bool
     {
         $headers = getallheaders();
