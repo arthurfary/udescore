@@ -20,7 +20,7 @@ class Api
      * @param string $method
      */
     // Valida o método da api chamado
-    public function method(string $method): void
+    public function check_method(string $method): void
     {
         if (strtoupper($_SERVER["REQUEST_METHOD"]) !== strtoupper($method)) {
             throw new InvalidArgumentException(
