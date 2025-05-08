@@ -5,7 +5,7 @@ require_once "../api.php";
 try {
     $api = new Api(); // Inicializa a api
 
-    $api->check_method()("POST"); // Valida se o método chamado é o correto
+    $api->check_method("POST"); // Valida se o método chamado é o correto
 
     $parametroValor = $api->obterParametro("parametro"); // Obtém o valor de um parameter específico da api (http://www.udescore/?parametro=1)
     // Nesse caso a variável parametroValor terá o valor 1
