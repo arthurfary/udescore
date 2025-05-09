@@ -72,7 +72,7 @@ class DB
     function TRollback(): void
     {
         try {
-            if ($this->transaction == true) {
+            if ($this->transaction == false) {
                 return;
             }
             $this->dbh->rollBack();
