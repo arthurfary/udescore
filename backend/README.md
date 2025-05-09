@@ -17,9 +17,14 @@ git clone https://github.com/{usuario}/udescore
 
 Agora abra no VS Code a pasta criada (udescore) e começe a desenvolver, mas não antes do próximo passo:
 
-## Antes de Começar a Desenvolver
+## Antes de Começar a Desenvolver - Acesso ao DB
 
-Entrar em contato com Freddy para pegar o arquivo de credenciais do banco e configurações do apache para desenvolvimento local.
+Baixar os arquivos de configurações através do link do drive: https://drive.google.com/file/d/1RK1tvsl-elTu_WQoRKkyghRftmZsbl4S/view?usp=sharing
+
+Senha do arquivo zip: uu6QYk~L]3
+
+Pegar os arquivos ".htaccess" e "config.php" e colocar dentro da pasta /backend.
+Pronto, seu acesso ao banco de dados deve estar funcionando normalmente.
 
 # Backend API - Exemplo
 
