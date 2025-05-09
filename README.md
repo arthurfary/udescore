@@ -15,6 +15,7 @@ Desenvolver um aplicativo que utiliza um sistema de ranks (estilo de jogos) base
 ## Como Dsenvolver
 
 Clique [aqui](/backend/readme.md) para aprender como desenvolver o **BACKEND**.
+
 Clique [aqui](/frontend/readme.md) para aprender como desenvolver o **FRONTEND**.
 
 ## Divisão de Tarefas
