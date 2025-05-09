@@ -7,7 +7,7 @@ Desenvolver um aplicativo que utiliza um sistema de ranks (estilo de jogos) base
 ## Tecnologias
 - **Frontend (App)**: React Native
   - Aplicativo focado em realizar chamadas ao backend, com pouco processamento interno.
-- **Backend**: Python (Django ou Flask)
+- **Backend**: PHP
   - Responsável pelo processamento dos dados e rotas para fornecer as notas dos alunos.
 - **Banco de Dados/Servidor**:
   - Hospedagem do servidor e banco de dados na Hostinger.
