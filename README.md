@@ -9,8 +9,13 @@ Desenvolver um aplicativo que utiliza um sistema de ranks (estilo de jogos) base
   - Aplicativo focado em realizar chamadas ao backend, com pouco processamento interno.
 - **Backend**: Python (Django ou Flask)
   - Responsável pelo processamento dos dados e rotas para fornecer as notas dos alunos.
-- **Banco de Dados/Servidor**: 
+- **Banco de Dados/Servidor**:
   - Hospedagem do servidor e banco de dados na Hostinger.
+
+## Como Dsenvolver
+
+Clique [aqui](/backend/readme.md) para aprender como desenvolver o **BACKEND**.
+Clique [aqui](/frontend/readme.md) para aprender como desenvolver o **FRONTEND**.
 
 ## Divisão de Tarefas
 
