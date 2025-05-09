@@ -15,13 +15,13 @@ Clonar o repositório:
 git clone https://github.com/{usuario}/udescore
 ```
 
-Agora abra no VS Code a pasta criada (udescore) e começe a desenvolver, mas não antes do próximo passo:
+Agora abra no VS Code a pasta criada (udescore) e começe a desenvolver na pasta /backend, mas não antes do próximo passo:
 
 ## Antes de Começar a Desenvolver - Acesso ao DB
 
 Baixar os arquivos de configurações através do link do drive: https://drive.google.com/file/d/1RK1tvsl-elTu_WQoRKkyghRftmZsbl4S/view?usp=sharing
 
-Senha do arquivo zip: uu6QYk~L]3
+Senha do arquivo zip está fixado no grupo do whatsapp da matéria!
 
 Pegar os arquivos ".htaccess" e "config.php" e colocar dentro da pasta /backend.
 Pronto, seu acesso ao banco de dados deve estar funcionando normalmente.
