@@ -4,6 +4,11 @@
 
 Desenvolver um aplicativo que utiliza um sistema de ranks (estilo de jogos) baseado nas notas dos alunos, para encorajar o estudo de forma gamificada.
 
+## Design
+
+O protótipo visual do aplicativo foi desenvolvido no Canva.  
+[Acesse o design aqui](https://www.canva.com/design/DAGm_6mePuE/k-8DEvxPT5-YhxS9P-cCpQ/edit?utm_content=DAGm_6mePuE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) para visualizar a interface e a identidade visual do projeto.
+
 ## Tecnologias
 
 - **Frontend (App)**: React Native
