@@ -14,11 +14,11 @@ Qual será o schema do banco de dados?
 | --- | ------- | ------------ | ------------ | ------ | ------------ |
 | 1   | prog002 | Progamação 2 | 2025-02-15   | a      | 1            |
 
-- Permissoes (chaveadas a tabela usu)
+- Matérias do Usuário
 
-| id_seq | cod_usu | matricula  | cod_materia |
-| ------ | ------- | ---------- | ----------- |
-| 1      | 3       | 1234567898 | prog002     |
+| id_seq | id_usu | id_materia |
+| ------ | ------ | ---------- |
+| 1      | 3      | 1          |
 
 - Questionários
 
