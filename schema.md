@@ -36,6 +36,6 @@ Qual será o schema do banco de dados?
 
 - Questionários do Aluno
 
-| id_quest | id_aluno | pontos | data de termino | qtd_acertos | tempo |
-| -------- | -------- | ------ | --------------- | ----------- | ----- |
-| 1        | 1        | 50     | 20250203        | 5           | 600   |
+| id_seq | id_quest | id_aluno | pontos | data de termino | qtd_acertos | tempo |
+| ------ | -------- | -------- | ------ | --------------- | ----------- | ----- |
+| 1      | 1        | 1        | 50     | 20250203        | 5           | 600   |
