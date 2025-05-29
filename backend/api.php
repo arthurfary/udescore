@@ -126,4 +126,21 @@ class Api
     }
 }
 
+class Perguntas
+{
+    private PDO $pdo;
+
+    public function __construct(PDO $pdo)
+    {
+        $this->pdo = $pdo;
+    }
+
+    public function listar(): array
+    {
+        $stmt = $this->pdo->query("SELECT * FROM pergunta");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
+
+
 ?>
