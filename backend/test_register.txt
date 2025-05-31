@@ -1,0 +1,4 @@
+curl -X POST http://localhost/udescore/backend/register.php \
+  -H "Content-Type: application/json" \
+  -d '{"email":"test@example.com","senha":"123456","matricula":"123"}'
+
