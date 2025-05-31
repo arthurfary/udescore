@@ -1,5 +1,7 @@
 # Como desenvolver no Frontend
 
+Crie um fork do repositório [aqui](https://github.com/arthurfary/udescore/fork), com o fork você terá uma cópia sua do repositório.
+
 ## Downloads necessários
 
 Para começar a desenvolver, você precisa ter o [NodeJs](https://nodejs.org/pt) e o [Java](https://adoptium.net/) baixados em sua máquina.
@@ -11,9 +13,9 @@ Para configurar o Android Studio, siga os passos [do guia oficial](https://react
 
 ### Rodando o app
 
-Para rodar o APP, clone o repositório em uma pasta de sua escolha e entre na pasta gerada com o comando:
+Para rodar o APP, clone o repositório em uma pasta de sua escolha e entre na pasta gerada com o comando (MUDE SEU NOME PARA O NOME DO SEU GITHUB, assim você vai clonar seu fork):
 ```
-git clone https://www.github.com/arthurfary/udescore && cd udescore
+git clone https://www.github.com/SEUNOME/udescore && cd udescore
 ```
 
 Depois baixe os modulos com: 
