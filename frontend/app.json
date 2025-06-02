@@ -1,4 +1,7 @@
 {
   "name": "udescore",
-  "displayName": "udescore"
+  "displayName": "udescore",
+  "plugins": [
+    "expo-font"
+  ]
 }
