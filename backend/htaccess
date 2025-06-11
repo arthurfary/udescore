@@ -1,0 +1,69 @@
+# Ativar reescrita de URLs
+RewriteEngine On
+
+# Bloquear o acesso ao arquivo .htaccess
+<Files .htaccess>
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Evitar o acesso direto a arquivos de configuração e backups
+<FilesMatch "(config\.php|\.bak|\.swp|\.sql)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "^(api|db)\.php$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Habilitar compressão gzip para reduzir o tempo de carregamento
+AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css application/x-javascript application/javascript application/json
+
+# Desabilitar listagem de diretórios
+Options -Indexes
+
+# Prevenir acesso a arquivos temporários
+<FilesMatch "\.(log|bak|swp|tmp|git)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Definir cache de conteúdo para melhorar desempenho
+<FilesMatch "\.(jpg|jpeg|png|gif|css|js|ico|pdf)$">
+    Header set Cache-Control "max-age=31536000, public"
+</FilesMatch>
+
+# Segurança contra injeção de código
+
+# Bloquear tentativas de injeção SQL
+RewriteCond %{QUERY_STRING} (\b(select|insert|update|delete|drop|union|--|#|benchmark|sleep|into|load_file|outfile|load data|information_schema)\b) [NC]
+RewriteRule ^.*$ - [F,L]
+
+# Bloquear tentativas de injeção XSS
+RewriteCond %{QUERY_STRING} (<|>|%3C|%3E|%00|%27|%22|%3D|%28|%29|%3B|%2F|%5C|%25|eval|script|alert|document|window) [NC]
+RewriteRule ^.*$ - [F,L]
+
+# Bloquear tentativas de injeção de comandos do sistema
+RewriteCond %{QUERY_STRING} (cmd|exec|bash|sh|system|shell|eval) [NC]
+RewriteRule ^.*$ - [F,L]
+
+# Bloquear tentativas de injeção por caracteres especiais
+RewriteCond %{QUERY_STRING} (\%3C|\%3E|\%00|\%27|\%22|\%2F|\%5C|\%3B|\%28|\%29) [NC]
+RewriteRule ^.*$ - [F,L]
+
+# Bloquear acesso a arquivos PHP via query string
+RewriteCond %{QUERY_STRING} (\.php) [NC]
+RewriteRule ^.*$ - [F,L]
+
+# Bloquear URLs que contenham tentativas de injeção de código (exemplo de SQLi e XSS)
+RewriteCond %{REQUEST_URI} (\b(select|insert|update|delete|drop|union|--|#|eval|alert|script|<|>|%3C|%3E|%00|%27|%22|%3D|%28|%29|%3B|%2F|%5C|%25) [NC]
+RewriteRule ^.*$ - [F,L]
+
+# Prevenir acesso a arquivos de configuração e backups via query string
+RewriteCond %{QUERY_STRING} (\.bak|\.swp|\.sql|\.ini|\.conf|\config|\.config) [NC]
+RewriteRule ^.*$ - [F,L]
+
+# Habilitar proteção contra XSS
+Header set X-XSS-Protection "1; mode=block"
