@@ -145,6 +145,7 @@ function LoginScreen({ setPage }: Props): React.JSX.Element {
   };
 
   const checkLogin = async () => { /* Pasini: Faz igual para o registro! */
+
     const response = await fetch('https://udescore.fooyer.space/backend/login.php', { /* Pasini: Altere para register.php ! */
             method: 'POST',
             headers: {
