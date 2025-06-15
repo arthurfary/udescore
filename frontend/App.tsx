@@ -4,11 +4,11 @@ import {
   Text,
   View,
 } from 'react-native';
-import Home from './Pages/Home';
+import LoginScreen from './Pages/LoginScreen';
 
 function App(): React.JSX.Element {
   return (
-    <Home />
+    <LoginScreen />
   );
 }
 
