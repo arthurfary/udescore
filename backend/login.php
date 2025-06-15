@@ -1,8 +1,11 @@
 <?php
 
-require_once("Api.php");
+require_once "api.php";
+require_once "db.php";
 
 $api = new Api();
+
+$db = new DB();
 
 try {
     // Permite apenas POST
@@ -15,19 +18,38 @@ try {
     $email = $body["email"];
     $senha = $body["senha"];
 
+    $usuario = $db->query(
+        "SELECT email, senha FROM usuario WHERE email = ('$email')"
+    )[0];
+
     // Aqui você faria uma verificação no banco de dados, por exemplo
-    if ($email === "teste@exemplo.com" && $senha === "123456") {
-        $api->sendResponse(200, [
-            "message" => "Login realizado com sucesso!",
-            "success" => true,
-            "token" => "fake-jwt-token-aqui"
-        ]);
-    } else {
-        $api->sendResponse(401, [
-            "message" => "Email ou senha inválidos.",
-            "success" => false
-        ]);
+    if (!$usuario) {
+        return $api->sendResponse(
+            401,
+            [
+                "message" => "Email não encontrado.",
+                "success" => false
+            ]
+        );
     }
+
+    if ($email !== $usuario["email"] || !password_verify($senha, $usuario["senha"])) {
+        return $api->sendResponse(
+            401,
+            [
+                "message" => "Email ou senha inválidos.",
+                "success" => false
+            ]
+        );
+    }
+
+    return $api->sendResponse(
+        200,
+        [
+          "message" => "Login realizado com sucesso!",
+          "success" => true,
+        ]
+    );
 } catch (Exception $e) {
     $api->tratarException($e);
 }

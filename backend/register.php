@@ -21,12 +21,23 @@ try {
     $senha = $body["senha"];
     $matricula = $body["matricula"];
 
+    $db_email = $db->query("SELECT email FROM usuario WHERE email = '$email'");
+
+    if ($db_email) { // se já tiver cadastrado o email
+        return $api->sendResponse(
+            400,
+            ['success' => false, 'message' => 'Email já cadastrado.']
+        );
+    }
+
     // Hash em argon2id
     $pass_hash = password_hash($senha, PASSWORD_ARGON2ID);
-
     $db->TStart();
 
-    $db->query("INSERT INTO usuario (nome, email, senha, matricula, status, tipo) VALUES ('$nome', '$email', '$pass_hash', '$matricula', 'a', 'a')");
+    $db->query(
+        "INSERT INTO usuario (nome, email, senha, matricula, status, tipo) "
+        . "VALUES ('$nome', '$email', '$pass_hash', '$matricula', 'a', 'a')"
+    );
 
     $db->TCommit();
 
