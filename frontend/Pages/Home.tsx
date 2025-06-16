@@ -434,6 +434,8 @@ const ErrorComponent = ({ onRetry, errorMessage }) => (
   </View>
 );
 
+
+
 // Componente principal da aplicação
 const App = () => {
   const [cursosData, setCursosData] = useState([]);
@@ -443,18 +445,13 @@ const App = () => {
 
   // ⚠️ CONFIGURAÇÃO DA API - ALTERE AQUI PARA SUA API REAL ⚠️
   const API_CONFIG = {
-    // Substitua pela URL da sua API real
-    baseUrl: 'https://jsonplaceholder.typicode.com', // API de exemplo
+    baseUrl: 'https://udescore.fooyer.space/backend',
     endpoints: {
-      cursos: '/posts', // Endpoint que retorna a lista de cursos
+      cursos: '/turma.php', // Endpoint que retorna a lista de cursos
     },
     headers: {
       'Content-Type': 'application/json',
-      // Adicione headers de autenticação se necessário:
-      // 'Authorization': 'Bearer seu-token-aqui',
-      // 'X-API-Key': 'sua-chave-api-aqui',
     },
-    // Configurações de timeout
     timeout: 10000, // 10 segundos
   };
 
@@ -520,10 +517,9 @@ const App = () => {
       // Mapear dados da API para o formato esperado pelo app
       const cursosFormatados = data.slice(0, 10).map((item, index) => ({
         id: item.id || index,
-        // Adapte estes campos conforme sua API:
-        name: item.title || item.name || item.titulo || item.nome || `Curso ${index + 1}`,
-        link: item.link || item.url || `https://exemplo.com/curso/${item.id}`,
-        description: item.body || item.description || item.descricao,
+        name: item.title || item.name || item.titulo || item.nome || 'Curso ${index + 1}',
+        link: item.link || item.url || 'https://exemplo.com/curso/${item.id}',
+        description: item.curso || 'Curso não informado',
         category: item.category || item.categoria || 'Geral',
         // Adicione outros campos conforme necessário
       }));
@@ -590,13 +586,13 @@ const App = () => {
   // Função para lidar com cliques nos ícones da navegação
   const handleIconPress = (iconName) => {
     const urls = {
-      home: 'https://www.google.com',
-      trophy: 'https://www.google.com',
-      profile: 'https://www.google.com'
+      home: 'home',
+      trophy: 'ranking',
+      profile: 'profile'
     };
 
     if (urls[iconName]) {
-      Linking.openURL(urls[iconName]);
+      setCurrentScreen(urls[iconName]);
     }
   };
 
