@@ -163,6 +163,26 @@ function LoginScreen({ setPage }: Props): React.JSX.Element {
           }
   };
 
+  const checkRegister = async () => {
+
+    const response = await fetch('https://udescore.fooyer.space/backend/register.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ nome: formData.nome, email: formData.email, senha: formData.senha, matricula: formData.matricula }),
+          });
+
+          const data = await response.json();
+
+          if (data.success == false) {
+              alert(data.message)
+          } else {
+              alert('Cadastro realizado com sucesso!')
+              setCurrentScreen('login'); /* Se registrar com sucesso, volta para o login */
+          }
+  };
+
   // Tela Splash
   if (currentScreen === 'splash') {
     return (
@@ -331,7 +351,7 @@ function LoginScreen({ setPage }: Props): React.JSX.Element {
 
           <TouchableOpacity
             style={styles.submitButton}
-            onPress={() => alert('Cadastro realizado!')}
+            onPress={() => checkRegister()}
           >
             <ArrowIcon size={24} color="white" />
           </TouchableOpacity>
