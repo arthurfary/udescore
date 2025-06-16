@@ -125,7 +125,9 @@ const Logo = () => {
   );
 };
 
-function LoginScreen(): React.JSX.Element {
+
+
+function LoginScreen({ setPage }: Props): React.JSX.Element {
   const [currentScreen, setCurrentScreen] = useState('splash');
   const [formData, setFormData] = useState({
     nome: '',
@@ -140,6 +142,25 @@ function LoginScreen(): React.JSX.Element {
       ...prev,
       [field]: value
     }));
+  };
+
+  const checkLogin = async () => { /* Pasini: Faz igual para o registro! */
+
+    const response = await fetch('https://udescore.fooyer.space/backend/login.php', { /* Pasini: Altere para register.php ! */
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: formData.usuario, senha: formData.senha }),  /* Pasini: Coloque as informações de registro ! */
+          });
+
+          const data = await response.json();
+
+          if (data.success == false) { /* Pasini: Essa parte mantém igual (if e else) */
+              alert(data.message)
+          } else {
+              setPage('Home');
+          }
   };
 
   // Tela Splash
@@ -224,7 +245,7 @@ function LoginScreen(): React.JSX.Element {
 
           <TouchableOpacity
             style={styles.submitButton}
-            onPress={() => alert('Login realizado!')}
+            onPress={(e) => checkLogin(e)}
           >
             <ArrowIcon size={24} color="white" />
           </TouchableOpacity>
