@@ -475,7 +475,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop: 20,
+    position: 'absolute',
+    bottom: 120,
+    left: 20,
+    right: 20,
   },
   secondaryButtonOrange: {
     backgroundColor: '#FB923C',
@@ -499,7 +502,7 @@ const styles = StyleSheet.create({
     maxWidth: 300,
     alignSelf: 'center',
     width: '100%',
-    paddingBottom: 80,
+    paddingBottom: 120,
   },
   inputContainer: {
     marginBottom: 20,
