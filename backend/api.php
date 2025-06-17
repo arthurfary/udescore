@@ -142,5 +142,70 @@ class Perguntas
     }
 }
 
+class Usuario
+{
+    private PDO $pdo;
+
+    public function __construct(PDO $pdo)
+    {
+        $this->pdo = $pdo;
+    }
+
+    public function listar(): array
+    {
+        $stmt = $this->pdo->query("SELECT * FROM usuario");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
+
+class Turma
+{
+    private PDO $pdo;
+
+    public function __construct(PDO $pdo)
+    {
+        $this->pdo = $pdo;
+    }
+
+    public function listar(): array
+    {
+        $stmt = $this->pdo->query("SELECT * FROM turma");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
+
+class Questionario_aluno
+{
+    private PDO $pdo;
+
+    public function __construct(PDO $pdo)
+    {
+        $this->pdo = $pdo;
+    }
+
+    public function listar(): array
+    {
+        $stmt = $this->pdo->query("SELECT * FROM questionario_aluno");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
+
+class Questionario
+{
+    private PDO $pdo;
+
+    public function __construct(PDO $pdo)
+    {
+        $this->pdo = $pdo;
+    }
+
+    public function listar(): array
+    {
+        $stmt = $this->pdo->query("SELECT * FROM questionario");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
+
+
 
 ?>
