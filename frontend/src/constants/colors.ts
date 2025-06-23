@@ -1,6 +1,9 @@
 export const COLORS = {
   background: "#022415",
+  text: "#FFFFFF",
   label: "#FFFFFF",
-  primaryColor: "#00BF63",
-  secondaryColor: "#EBB840",
+  primary: "#00BF63",
+  secondary: "#EBB840",
+  input: "#1D372B",
+  border: "#182E24",
 };

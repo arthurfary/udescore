@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const useLogin = () => {
-  const [state, setState] = useState(null);
+  const [activeForm, setActiveForm] = useState<"login" | "newUser" | null>(
+    null
+  );
+
   // Add your business logic here
-  return { state, setState };
+  return { activeForm, setActiveForm };
 };
 
 export default useLogin;

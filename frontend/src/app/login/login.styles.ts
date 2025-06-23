@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
   buttonPrimary: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: COLORS.primaryColor,
-    borderColor: COLORS.primaryColor,
+    backgroundColor: COLORS.primary,
+    borderColor: COLORS.primary,
     borderRadius: 8,
     marginBottom: 16,
     width: 120,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   buttonSecondary: {
     alignItems: "center",
     justifyContent: "center",
-    borderColor: COLORS.primaryColor,
+    borderColor: COLORS.primary,
     borderWidth: 1,
     color: COLORS.label,
     marginBottom: 16,
