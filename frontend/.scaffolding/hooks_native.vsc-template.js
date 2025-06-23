@@ -38,6 +38,7 @@ import { View, Text } from 'react-native';
 import use${toPascalCase(inputs.name)} from './${toKebabCase(
               inputs.name
             )}.hook';
+import styles from './${toKebabCase(inputs.name)}.styles';
 
 export interface ${toPascalCase(inputs.name)}Props {}
 
@@ -46,8 +47,8 @@ const ${toPascalCase(inputs.name)}: React.FC<${toPascalCase(
             )}Props> = () => {
   const {} = use${toPascalCase(inputs.name)}();
   return (
-    <View>
-      <Text>${toPascalCase(inputs.name)} Screen</Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>${toPascalCase(inputs.name)} Screen</Text>
     </View>
   );
 };
@@ -57,9 +58,23 @@ export default ${toPascalCase(inputs.name)};
           },
           {
             type: "file",
-            name: (inputs) => `${toKebabCase(inputs.name)}.styles.css`,
-            content: (inputs) =>
-              `/* Styles for ${toPascalCase(inputs.name)} */`,
+            name: (inputs) => `${toKebabCase(inputs.name)}.styles.ts`,
+            content: (inputs) => `import { StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 20,
+    color: 'blue',
+  },
+});
+
+export default styles;
+`,
           },
           {
             type: "file",
