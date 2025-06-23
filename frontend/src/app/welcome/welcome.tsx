@@ -1,7 +1,7 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import useWelcome from './welcome.hook';
-import styles from './welcome.styles';
+import React from "react";
+import { View, Image } from "react-native";
+import useWelcome from "./welcome.hook";
+import styles from "./welcome.styles";
 
 export interface WelcomeProps {}
 
@@ -9,7 +9,10 @@ const Welcome: React.FC<WelcomeProps> = () => {
   const {} = useWelcome();
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Welcome Screen</Text>
+      <Image
+        source={require("../../../assets/logo.png")}
+        style={styles.image}
+      />
     </View>
   );
 };
