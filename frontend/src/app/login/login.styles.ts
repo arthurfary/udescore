@@ -24,6 +24,9 @@ const styles = StyleSheet.create({
     height: 120,
     margin: 40,
   },
+  buttonIcon: {
+    resizeMode: "contain",
+  },
   buttonPrimary: {
     alignItems: "center",
     justifyContent: "center",
@@ -44,6 +47,17 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: 120,
     height: 32,
+  },
+  circularButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: COLORS.secondary,
+    borderColor: COLORS.secondary,
+    borderWidth: 1,
+    color: COLORS.label,
+    borderRadius: 150,
+    width: 40,
+    height: 40,
   },
 });
 

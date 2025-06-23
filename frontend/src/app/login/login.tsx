@@ -37,12 +37,24 @@ const Login: React.FC<LoginProps> = () => {
         <>
           <Input label="Usuário" />
           <Input label="Senha" type="password" />
+          <TouchableHighlight style={styles.circularButton}>
+            <Image
+              source={require("../../../assets/arrow.png")}
+              style={styles.buttonIcon}
+            />
+          </TouchableHighlight>
         </>
       ) : (
         <>
           <Input label="Usuário" />
           <Input label="Matrícula" type="numeric" />
           <Input label="Senha" type="password" />
+          <TouchableHighlight style={styles.circularButton}>
+            <Image
+              source={require("../../../assets/arrow.png")}
+              style={styles.buttonIcon}
+            />
+          </TouchableHighlight>
         </>
       )}
     </View>
