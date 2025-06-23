@@ -7,7 +7,15 @@ import Input from "../../components/input";
 export interface LoginProps {}
 
 const Login: React.FC<LoginProps> = () => {
-  const { activeForm, setActiveForm } = useLogin();
+  const {
+    activeForm,
+    userName,
+    password,
+    setActiveForm,
+    setUserName,
+    setPassword,
+    handleSubmit,
+  } = useLogin();
 
   return (
     <View style={styles.container}>
@@ -35,9 +43,21 @@ const Login: React.FC<LoginProps> = () => {
         </>
       ) : activeForm === "login" ? (
         <>
-          <Input label="Usuário" />
-          <Input label="Senha" type="password" />
-          <TouchableHighlight style={styles.circularButton}>
+          <Input
+            value={userName}
+            label="Usuário"
+            onChangeText={(e) => setUserName(e)}
+          />
+          <Input
+            value={password}
+            label="Senha"
+            type="password"
+            onChangeText={(e) => setPassword(e)}
+          />
+          <TouchableHighlight
+            style={styles.circularButton}
+            onPress={handleSubmit}
+          >
             <Image
               source={require("../../../assets/arrow.png")}
               style={styles.buttonIcon}
