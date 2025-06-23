@@ -496,7 +496,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     position: 'absolute',
-    bottom: 120,
+    bottom: 98,
     left: 20,
     right: 20,
   },
