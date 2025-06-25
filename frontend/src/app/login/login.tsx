@@ -4,9 +4,11 @@ import useLogin from "./login.hook";
 import styles from "./login.styles";
 import Input from "../../components/input";
 
-export interface LoginProps {}
+export interface LoginProps {
+  navigation: any;
+}
 
-const Login: React.FC<LoginProps> = () => {
+const Login: React.FC<LoginProps> = ({ navigation }) => {
   const {
     activeForm,
     userName,
@@ -15,7 +17,7 @@ const Login: React.FC<LoginProps> = () => {
     setUserName,
     setPassword,
     handleSubmit,
-  } = useLogin();
+  } = useLogin({ navigation });
 
   return (
     <View style={styles.container}>
@@ -63,17 +65,30 @@ const Login: React.FC<LoginProps> = () => {
               style={styles.buttonIcon}
             />
           </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.buttonRedirect}
+            onPress={() => setActiveForm("newUser")}
+          >
+            <Text style={styles.buttonText}>CADASTRAR</Text>
+          </TouchableHighlight>
         </>
       ) : (
         <>
           <Input label="Usuário" />
           <Input label="Matrícula" type="numeric" />
+          <Input label="Email" type="email" />
           <Input label="Senha" type="password" />
           <TouchableHighlight style={styles.circularButton}>
             <Image
               source={require("../../../assets/arrow.png")}
               style={styles.buttonIcon}
             />
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.buttonRedirect}
+            onPress={() => setActiveForm("login")}
+          >
+            <Text style={styles.buttonText}>ENTRAR</Text>
           </TouchableHighlight>
         </>
       )}

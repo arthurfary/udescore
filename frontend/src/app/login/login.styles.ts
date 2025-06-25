@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableHighlight } from "react-native";
 import { COLORS } from "../../constants/colors";
 
 const styles = StyleSheet.create({
@@ -48,6 +48,14 @@ const styles = StyleSheet.create({
     width: 120,
     height: 32,
   },
+  buttonRedirect: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 50,
+    width: 120,
+    height: 32,
+  },
+
   circularButton: {
     alignItems: "center",
     justifyContent: "center",

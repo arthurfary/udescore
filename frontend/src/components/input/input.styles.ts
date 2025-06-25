@@ -2,7 +2,9 @@ import { StyleSheet } from "react-native";
 import { COLORS } from "../../constants/colors";
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    width: "60%",
+  },
   label: {
     fontSize: 16,
     color: COLORS.label,
@@ -18,6 +20,7 @@ const styles = StyleSheet.create({
     borderColor: COLORS.border,
     borderRadius: 8,
     borderWidth: 1,
+    width: "100%",
   },
 });
 
