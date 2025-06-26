@@ -90,21 +90,25 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
         <>
           <Input
             label="Usuário"
+            maxLength={15}
             value={userNameRegister}
             onChangeText={(e) => setUserNameRegister(e)}
           />
           <Input
-            label="Matrícula" type="numeric"
+            label="Matrícula"
+            type="numeric"
             value={matriculaRegister}
             onChangeText={(e) => setMatriculaRegister(e)}
           />
           <Input
-            label="Email" type="email"
+            label="Email"
+            type="email"
             value={emailRegister}
             onChangeText={(e) => setEmailRegister(e)}
           />
           <Input
-            label="Senha" type="password"
+            label="Senha"
+            type="password"
             value={passwordRegister}
             onChangeText={(e) => setPasswordRegister(e)}
           />
@@ -119,7 +123,7 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
           </TouchableHighlight>
           <TouchableHighlight
             style={styles.buttonRedirect}
-            onPress={() => setActiveFormRegister("login")}
+            onPress={() => setActiveForm("login")}
           >
             <Text style={styles.buttonText}>ENTRAR</Text>
           </TouchableHighlight>

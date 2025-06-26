@@ -3,9 +3,13 @@ import { View, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styles from "./menu.styles";
+import useMenu from "./menu.hook";
 
 const Menu: React.FC<{ navigation: any }> = ({ navigation }) => {
   const insets = useSafeAreaInsets();
+  const { handlePressHome, handlePressRank, handlePressPerfil } = useMenu({
+    navigation,
+  });
 
   return (
     <View
@@ -16,22 +20,13 @@ const Menu: React.FC<{ navigation: any }> = ({ navigation }) => {
         },
       ]}
     >
-      <TouchableOpacity
-        style={styles.menuItem}
-        onPress={() => navigation.navigate("Home")}
-      >
+      <TouchableOpacity style={styles.menuItem} onPress={handlePressHome}>
         <Ionicons name="home-outline" size={28} color="#FFF" />
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.menuItem}
-        onPress={() => navigation.navigate("Ranking")}
-      >
+      <TouchableOpacity style={styles.menuItem} onPress={handlePressRank}>
         <Ionicons name="trophy-outline" size={28} color="#FFF" />
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.menuItem}
-        onPress={() => navigation.navigate("Perfil")}
-      >
+      <TouchableOpacity style={styles.menuItem} onPress={handlePressPerfil}>
         <Ionicons name="person-outline" size={28} color="#FFF" />
       </TouchableOpacity>
     </View>
