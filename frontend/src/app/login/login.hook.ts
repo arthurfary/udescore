@@ -32,7 +32,7 @@ const useLogin = ({ navigation }: any) => {
 };
 
 const useRegister = ({ navigation }: any) => {
-  const [activeForm, setActiveForm] = useState<"register" | "newUser" | null>(
+  const [activeForm, setActiveForm] = useState<"login" | "newUser" | null>(
     null
   );
   const [userName, setUserName] = useState("");
@@ -40,13 +40,20 @@ const useRegister = ({ navigation }: any) => {
   const [password, setPassword] = useState("");
   const [matricula, setMatricula] = useState("");
 
-  async function handleSubmit() {
-    const result = await registerService.login(userName, email, password, matricula);
+  async function handleSubmit(setActiveForm: any) {
+    const result = await registerService.register(
+      userName,
+      email,
+      password,
+      matricula
+    );
     console.log("🚀 ~ handleSubmit ~ result:", result);
 
-    if (result.status == true) navigation.navigate("Login");
-    else {
-      alert("");
+    if (result.status == true) {
+      alert(result.data.message);
+      setActiveForm("login");
+    } else {
+      alert(result.error);
     }
   }
 
@@ -64,8 +71,6 @@ const useRegister = ({ navigation }: any) => {
     setMatricula,
     handleSubmit,
   };
-
-  
 };
 
-export default {useLogin, useRegister};
+export default { useLogin, useRegister };

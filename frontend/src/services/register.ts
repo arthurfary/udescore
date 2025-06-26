@@ -1,7 +1,12 @@
 import { useApi } from "./api";
 
 const registerService = {
-  login: async (nome: string, email: string, senha: string, matricula: string) => {
+  register: async (
+    nome: string,
+    email: string,
+    senha: string,
+    matricula: string
+  ) => {
     return await useApi({
       method: "POST",
       url: "/register.php",
