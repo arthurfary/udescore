@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableHighlight } from "react-native";
 import hooks from "./login.hook";
 import styles from "./login.styles";
 import Input from "../../components/input";
+import Welcome from "../welcome";
 
 export interface LoginProps {
   navigation: any;
@@ -13,6 +14,7 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
     activeForm,
     userName,
     password,
+    showWelcome,
     setActiveForm,
     setUserName,
     setPassword,
@@ -32,6 +34,10 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
     setMatricula: setMatriculaRegister,
     handleSubmit: handleSubmitRegister,
   } = hooks.useRegister({ navigation });
+
+  if (showWelcome) {
+    return <Welcome />;
+  }
 
   return (
     <View style={styles.container}>
