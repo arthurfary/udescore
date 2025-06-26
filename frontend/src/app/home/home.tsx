@@ -7,10 +7,6 @@ import styles from "./home.styles";
 import Menu from "../../components/menu";
 import { COLORS } from "../../constants/colors";
 
-export interface HomeProps {
-  navigation: any;
-}
-
 const turmas = [
   { nome: "React Native Basics" },
   { nome: "JavaScript Essencial" },
@@ -50,11 +46,11 @@ const DotPattern = () => (
   </Svg>
 );
 
-const Home: React.FC<HomeProps> = ({ navigation }) => {
+const Home: React.FC = () => {
   const insets = useSafeAreaInsets();
 
   const handlePress = (turma: string) => {
-    navigation.navigate("Login", { turma });
+    alert("Clicou no curso da turma: " + turma);
   };
 
   return (
@@ -89,7 +85,7 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
           </TouchableOpacity>
         ))}
       </ScrollView>
-      <Menu navigation={navigation} />
+      <Menu />
     </>
   );
 };

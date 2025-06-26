@@ -5,17 +5,19 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import Login from "./src/app/login";
 import Home from "./src/app/home";
-import Rank from "./src/app/rank";
+import Ranking from "./src/app/ranking";
 
 import * as SystemUI from "expo-system-ui";
 import { useEffect } from "react";
 import { COLORS } from "./src/constants/colors";
+
 
 const Stack = createNativeStackNavigator();
 
 export type RootStackParamList = {
   Login: undefined;
   Home: undefined;
+  Ranking: undefined;
 };
 
 export default function App() {
@@ -33,7 +35,7 @@ export default function App() {
         >
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Rank" component={Rank} />
+          <Stack.Screen name="Ranking" component={Ranking} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

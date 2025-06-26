@@ -3,7 +3,7 @@ const useMenu = ({ navigation }: { navigation: any }) => {
     navigation.navigate("Home");
   };
   const handlePressRank = () => {
-    navigation.navigate("Rank");
+    navigation.navigate("Ranking");
   };
   const handlePressPerfil = () => {
     navigation.navigate("Perfil");
