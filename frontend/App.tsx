@@ -1,35 +1,38 @@
-import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import Home from './Pages/Home';
-import LoginScreen from './Pages/LoginScreen';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
-function App(): React.JSX.Element {
-  const [page, setPage] = useState('Login');
+import Login from "./src/app/login";
+import Home from "./src/app/home";
+import * as SystemUI from "expo-system-ui";
+import { useEffect } from "react";
+import { COLORS } from "./src/constants/colors";
 
-  let screen;
+const Stack = createNativeStackNavigator();
 
-  switch (page) {
-    case 'Login':
-      screen = <LoginScreen setPage={setPage} />;
-      break;
-    case 'Home':
-      screen = <Home />;
-      break;
-    default:
-      screen = <LoginScreen setPage={setPage} />;
-  }
+export type RootStackParamList = {
+  Login: undefined;
+  Home: undefined;
+};
+
+export default function App() {
+  useEffect(() => {
+    SystemUI.setBackgroundColorAsync(COLORS.background);
+  }, []);
 
   return (
-    <View style={styles.container}>
-      {screen}
-    </View>
+    <SafeAreaProvider>
+      <StatusBar style="auto" />
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Login"
+          screenOptions={{ headerShown: false }}
+        >
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Home" component={Home} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
-
-export default App;
