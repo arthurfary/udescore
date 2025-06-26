@@ -20,16 +20,16 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
   } = hooks.useLogin({ navigation });
 
   const {
-    activeForm: activeFormRegister,
+    // activeForm: activeFormRegister,
     userName: userNameRegister,
     email: emailRegister,
     password: passwordRegister,
     matricula: matriculaRegister,
-    setActiveForm: setActiveFormRegister,
+    // setActiveForm: setActiveFormRegister,
     setUserName: setUserNameRegister,
+    setEmail: setEmailRegister,
     setPassword: setPasswordRegister,
     setMatricula: setMatriculaRegister,
-    setEmail: setEmailRegister,
     handleSubmit: handleSubmitRegister,
   } = hooks.useRegister({ navigation });
 
@@ -94,23 +94,26 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
             onChangeText={(e) => setUserNameRegister(e)}
           />
           <Input
-            label="Matrícula" type="numeric"
+            label="Matrícula"
+            type="numeric"
             value={matriculaRegister}
             onChangeText={(e) => setMatriculaRegister(e)}
           />
           <Input
-            label="Email" type="email"
+            label="Email"
+            type="email"
             value={emailRegister}
             onChangeText={(e) => setEmailRegister(e)}
           />
           <Input
-            label="Senha" type="password"
+            label="Senha"
+            type="password"
             value={passwordRegister}
             onChangeText={(e) => setPasswordRegister(e)}
           />
           <TouchableHighlight
             style={styles.circularButton}
-            onPress={handleSubmitRegister}
+            onPress={() => handleSubmitRegister(setActiveForm)}
           >
             <Image
               source={require("../../../assets/arrow.png")}
@@ -119,7 +122,7 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
           </TouchableHighlight>
           <TouchableHighlight
             style={styles.buttonRedirect}
-            onPress={() => setActiveFormRegister("login")}
+            onPress={() => setActiveForm("login")}
           >
             <Text style={styles.buttonText}>ENTRAR</Text>
           </TouchableHighlight>

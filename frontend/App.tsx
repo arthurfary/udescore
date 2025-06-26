@@ -5,6 +5,8 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import Login from "./src/app/login";
 import Home from "./src/app/home";
+import Rank from "./src/app/rank";
+
 import * as SystemUI from "expo-system-ui";
 import { useEffect } from "react";
 import { COLORS } from "./src/constants/colors";
@@ -31,6 +33,7 @@ export default function App() {
         >
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Rank" component={Rank} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
