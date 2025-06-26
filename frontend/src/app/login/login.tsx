@@ -20,16 +20,16 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
   } = hooks.useLogin({ navigation });
 
   const {
-    activeForm: activeFormRegister,
+    // activeForm: activeFormRegister,
     userName: userNameRegister,
     email: emailRegister,
     password: passwordRegister,
     matricula: matriculaRegister,
-    setActiveForm: setActiveFormRegister,
+    // setActiveForm: setActiveFormRegister,
     setUserName: setUserNameRegister,
+    setEmail: setEmailRegister,
     setPassword: setPasswordRegister,
     setMatricula: setMatriculaRegister,
-    setEmail: setEmailRegister,
     handleSubmit: handleSubmitRegister,
   } = hooks.useRegister({ navigation });
 
@@ -90,7 +90,6 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
         <>
           <Input
             label="Usuário"
-            maxLength={15}
             value={userNameRegister}
             onChangeText={(e) => setUserNameRegister(e)}
           />
@@ -114,7 +113,7 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
           />
           <TouchableHighlight
             style={styles.circularButton}
-            onPress={handleSubmitRegister}
+            onPress={() => handleSubmitRegister(setActiveForm)}
           >
             <Image
               source={require("../../../assets/arrow.png")}
