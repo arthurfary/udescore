@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Image, TouchableHighlight } from "react-native";
-import useLogin from "./login.hook";
+import hooks from "./login.hook";
 import styles from "./login.styles";
 import Input from "../../components/input";
 
@@ -17,7 +17,19 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
     setUserName,
     setPassword,
     handleSubmit,
-  } = useLogin({ navigation });
+  } = hooks.useLogin({ navigation });
+
+  const {
+    activeForm: activeFormRegister,
+    userName: userNameRegister,
+    email: emailRegister,
+    password: passwordRegister,
+    matricula: matriculaRegister,
+    setActiveForm: setActiveFormRegister,
+    setUserName: setUserNameRegister,
+    setPassword: setPasswordRegister,
+    handleSubmit: handleSubmitRegister,
+  } = hooks.useRegister({ navigation });
 
   return (
     <View style={styles.container}>
@@ -74,10 +86,26 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
         </>
       ) : (
         <>
-          <Input label="Usuário" />
-          <Input label="Matrícula" type="numeric" />
-          <Input label="Email" type="email" />
-          <Input label="Senha" type="password" />
+          <Input 
+            label="Usuário" 
+            value={userNameRegister}
+            onChangeText={(e) => setUserNameRegister(e)}
+          />
+          <Input 
+            label="Matrícula" type="numeric" 
+            value={matriculaRegister}
+            onChangeText={(e) => setMatriculaRegister(e)}
+          />
+          <Input 
+            label="Email" type="email" 
+            value={emailRegister}
+            onChangeText={(e) => setEmailRegister(e)}
+            />
+          <Input 
+            label="Senha" type="password" 
+            value={passwordRegister}
+            onChangeText={(e) => setPasswordRegister(e)}
+            />
           <TouchableHighlight style={styles.circularButton}>
             <Image
               source={require("../../../assets/arrow.png")}
@@ -86,7 +114,7 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
           </TouchableHighlight>
           <TouchableHighlight
             style={styles.buttonRedirect}
-            onPress={() => setActiveForm("login")}
+            onPress={() => setActiveFormRegister("login")}
           >
             <Text style={styles.buttonText}>ENTRAR</Text>
           </TouchableHighlight>
