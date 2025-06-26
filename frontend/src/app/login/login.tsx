@@ -28,6 +28,8 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
     setActiveForm: setActiveFormRegister,
     setUserName: setUserNameRegister,
     setPassword: setPasswordRegister,
+    setMatricula: setMatriculaRegister,
+    setEmail: setEmailRegister,
     handleSubmit: handleSubmitRegister,
   } = hooks.useRegister({ navigation });
 
@@ -86,27 +88,30 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
         </>
       ) : (
         <>
-          <Input 
-            label="Usuário" 
+          <Input
+            label="Usuário"
             value={userNameRegister}
             onChangeText={(e) => setUserNameRegister(e)}
           />
-          <Input 
-            label="Matrícula" type="numeric" 
+          <Input
+            label="Matrícula" type="numeric"
             value={matriculaRegister}
             onChangeText={(e) => setMatriculaRegister(e)}
           />
-          <Input 
-            label="Email" type="email" 
+          <Input
+            label="Email" type="email"
             value={emailRegister}
             onChangeText={(e) => setEmailRegister(e)}
-            />
-          <Input 
-            label="Senha" type="password" 
+          />
+          <Input
+            label="Senha" type="password"
             value={passwordRegister}
             onChangeText={(e) => setPasswordRegister(e)}
-            />
-          <TouchableHighlight style={styles.circularButton}>
+          />
+          <TouchableHighlight
+            style={styles.circularButton}
+            onPress={handleSubmitRegister}
+          >
             <Image
               source={require("../../../assets/arrow.png")}
               style={styles.buttonIcon}
