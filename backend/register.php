@@ -41,11 +41,10 @@ try {
 
     $db->TCommit();
 
-    $api->sendResponse(200, ['success' => true]);
+    $api->sendResponse(200, ['success' => true, 'message' => 'Email cadastrado com sucesso.']);
 
 } catch (Exception $e) {
     $db->TRollback();
-
-    $api->sendResponse(500, ['success' => false]);
+    
     $api->tratarException($e);
 }

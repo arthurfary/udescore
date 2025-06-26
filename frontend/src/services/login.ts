@@ -1,10 +1,12 @@
-import axios from "axios";
-
-const API_URL = "https://udescore.fooyer.space/backend";
+import { useApi } from "./api";
 
 const loginService = {
   login: async (email: string, senha: string) => {
-    return axios.post(`${API_URL}/login.php`, { email, senha });
+    return await useApi({
+      method: "POST",
+      url: "/login.php",
+      data: { email, senha },
+    });
   },
 };
 
