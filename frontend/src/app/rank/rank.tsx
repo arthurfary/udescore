@@ -1,5 +1,12 @@
 import React from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+  FlatList,
+  Image,
+} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styles from "./rank.styles";
 import Menu from "../../components/menu";
@@ -50,9 +57,15 @@ const meuRanking = [
   },
 ];
 
+interface RankItem {
+  position: number;
+  nome: string;
+  pontos: number;
+  isUser?: boolean;
+}
+
 const Rank: React.FC<RankProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets();
-
   const meuRank = meuRanking[2];
 
   // Combina todos os ranks (com posição explícita)
@@ -98,56 +111,98 @@ const Rank: React.FC<RankProps> = ({ navigation }) => {
     extraRanking.sort((a, b) => a.position - b.position);
   }
 
+  // Função para obter cor baseada na posição
+  const getColorByPosition = (position: number) => {
+    switch (position) {
+      case 1:
+        return "#FFD700"; // Ouro
+      case 2:
+        return "#C0C0C0"; // Prata
+      case 3:
+        return "#CD7F32"; // Bronze
+      default:
+        return "#FFFFFF"; // Branco
+    }
+  };
+
+  // Renderizar item do ranking
+  const renderRankItem = ({ item }: { item: RankItem }) => {
+    const positionColor = getColorByPosition(item.position);
+    const nameColor = getColorByPosition(item.position);
+    const pointsColor = getColorByPosition(item.position);
+
+    return (
+      <View style={[styles.rankItem, item.isUser && styles.userRankItem]}>
+        <Text style={[styles.position, { color: positionColor }]}>
+          #{item.position}
+        </Text>
+
+        <Text
+          style={[
+            styles.name,
+            { color: nameColor },
+            item.isUser && styles.userName,
+          ]}
+        >
+          {item.nome}
+        </Text>
+
+        <Text style={[styles.points, { color: pointsColor }]}>
+          {item.pontos} Pts
+        </Text>
+      </View>
+    );
+  };
+
+  // Preparar dados para o FlatList
+  const top10Data = top10.map((item, index) => ({
+    ...item,
+    position: index + 1,
+    isUser: item.nome === meuRank.nome,
+  }));
+
+  const extraData = extraRanking.map((item) => ({
+    ...item,
+    isUser: item.nome === meuRank.nome,
+  }));
+
   return (
     <>
-      <ScrollView
-        contentContainerStyle={{
-          padding: 16,
-          paddingBottom: 100 + insets.bottom,
-          paddingTop: 100 + insets.top,
-          width: "100%",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        style={{ flex: 1, backgroundColor: COLORS.background }}
-      >
+      <View style={styles.container}>
         <Text style={styles.title}>Ranking</Text>
 
-        {/* Top 10 sempre */}
-        {top10.map((aluno, index) => {
-          const isUser = aluno.nome === meuRank.nome;
-          return (
-            <TouchableOpacity key={index} style={styles.courseCard}>
-              <View style={isUser ? styles.myLabel : styles.courseLabel}>
-                <Text style={styles.position}>{"#" + (index + 1)}</Text>
-                <Text style={styles.courseName}>{aluno.nome}</Text>
-                <Text style={styles.coursePoints}>{aluno.pontos} Pts</Text>
-              </View>
-            </TouchableOpacity>
-          );
-        })}
+        <ScrollView
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollContent}
+        >
+          {/* Top 10 */}
+          <FlatList
+            data={top10Data}
+            renderItem={renderRankItem}
+            keyExtractor={(item) => `top10-${item.position}`}
+            scrollEnabled={false}
+          />
 
-        <>
-          <View style={{ marginTop: 24, width: "100%" }} />
-          {extraRanking.map((aluno, index) => (
-            <TouchableOpacity key={index} style={styles.courseCard}>
-              <View
-                style={
-                  aluno.nome === meuRank.nome
-                    ? styles.myLabel
-                    : styles.courseLabel
-                }
-              >
-                <Text style={styles.position}>{"#" + aluno.position}</Text>
-                <Text style={styles.courseName}>{aluno.nome}</Text>
-                <Text style={styles.coursePoints}>{aluno.pontos} Pts</Text>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </>
-      </ScrollView>
+          {/* Separador se houver ranking extra */}
+          {extraData.length > 0 && (
+            <View style={styles.separator}>
+              <View style={styles.separatorLine} />
+            </View>
+          )}
+
+          {/* Ranking extra (ao redor do usuário) */}
+          <FlatList
+            data={extraData}
+            renderItem={renderRankItem}
+            keyExtractor={(item) => `extra-${item.position}`}
+            scrollEnabled={false}
+          />
+        </ScrollView>
+      </View>
+
       <Menu navigation={navigation} />
     </>
   );
 };
+
 export default Rank;
