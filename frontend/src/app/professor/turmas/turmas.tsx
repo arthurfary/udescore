@@ -4,7 +4,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import Svg, { Defs, Pattern, Rect, Circle } from "react-native-svg";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styles from "./turmas.styles";
-import Menu from "../../../components/menu";
 import { COLORS } from "../../../constants/colors";
 import { Entypo } from "@expo/vector-icons";
 import useHooks from "../professor.hook";
@@ -113,7 +112,6 @@ const ProfessorTurmas: React.FC<{ navigation: any }> = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
       </ScrollView>
-      <Menu />
     </>
   );
 };
