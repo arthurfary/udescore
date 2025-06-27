@@ -36,7 +36,7 @@ try {
 
     $resposta = $db->query($query, $parameters);
 
-    // Organiza para o aluno estar sempre no meio (se possível)
+    // Encontrar índice do aluno no resultado
     $alunoIndex = null;
     foreach ($resposta as $i => $row) {
         if ($row["id_aluno"] == $id_aluno) {
@@ -45,16 +45,19 @@ try {
         }
     }
 
-    $data = [];
+    $data = [null, null, null, null, null]; // posições fixas 0 a 4
 
     if ($alunoIndex !== null) {
-        // Pega até 2 antes e 2 depois, mas mantendo a ordem e evitando índice inválido
-        $start = max(0, $alunoIndex - 2);
-        $end = min(count($resposta) - 1, $alunoIndex + 2);
+        // Posição fixa do aluno será sempre o índice 2
+        $data[2] = $resposta[$alunoIndex];
 
-        for ($i = $start; $i <= $end; $i++) {
-            $data[] = $resposta[$i];
-        }
+        // Preenche até 2 anteriores
+        if (isset($resposta[$alunoIndex - 1])) $data[1] = $resposta[$alunoIndex - 1];
+        if (isset($resposta[$alunoIndex - 2])) $data[0] = $resposta[$alunoIndex - 2];
+
+        // Preenche até 2 posteriores
+        if (isset($resposta[$alunoIndex + 1])) $data[3] = $resposta[$alunoIndex + 1];
+        if (isset($resposta[$alunoIndex + 2])) $data[4] = $resposta[$alunoIndex + 2];
     }
 
     $api->sendResponse(200, [
