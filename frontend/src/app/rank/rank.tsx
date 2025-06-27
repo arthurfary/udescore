@@ -10,11 +10,6 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styles from "./rank.styles";
 import Menu from "../../components/menu";
-import { COLORS } from "../../constants/colors";
-
-export interface RankProps {
-  navigation: any;
-}
 
 const top10 = [
   { nome: "OOOOOOOOOOOOOOO", pontos: 100 },
@@ -64,7 +59,7 @@ interface RankItem {
   isUser?: boolean;
 }
 
-const Rank: React.FC<RankProps> = ({ navigation }) => {
+const Rank: React.FC = () => {
   const insets = useSafeAreaInsets();
   const meuRank = meuRanking[2];
 
@@ -200,7 +195,7 @@ const Rank: React.FC<RankProps> = ({ navigation }) => {
         </ScrollView>
       </View>
 
-      <Menu navigation={navigation} />
+      <Menu />
     </>
   );
 };
