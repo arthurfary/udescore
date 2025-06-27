@@ -16,7 +16,7 @@ try {
                     questionario_aluno.id_aluno,
                     usuario.nome,
                     SUM(questionario_aluno.pontos) AS total_pontos,
-                    ROW_NUMBER() OVER (ORDER BY SUM(questionario_aluno.pontos) DESC) AS posicao
+                    ROW_NUMBER() OVER (ORDER BY SUM(questionario_aluno.pontos) DESC) AS position
                 FROM questionario_aluno
                 JOIN usuario ON usuario.id = questionario_aluno.id_aluno
                 GROUP BY questionario_aluno.id_aluno, usuario.nome
@@ -25,9 +25,9 @@ try {
                 SELECT posicao As position FROM ranking WHERE id_aluno = :id_aluno
             )
             SELECT * FROM ranking
-            WHERE posicao BETWEEN (SELECT position FROM posicao_aluno) - 2 
+            WHERE position BETWEEN (SELECT position FROM posicao_aluno) - 2 
                             AND (SELECT position FROM posicao_aluno) + 2
-            ORDER BY posicao
+            ORDER BY position
         ";
 
     $parameters = [
