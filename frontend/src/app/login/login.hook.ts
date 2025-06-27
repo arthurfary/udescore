@@ -14,8 +14,14 @@ const useLogin = ({ navigation }: any) => {
     const result = await loginService.login(userName, password);
     console.log("🚀 ~ handleSubmit ~ result:", result);
 
-    if (result.status == true) navigation.navigate("Home");
-    else {
+    if (result.status == true) {
+      const tipoUsuario = result.data.data.tipo;
+      if (tipoUsuario == "p") {
+        navigation.navigate("Professor");
+      } else if (tipoUsuario == "a") {
+        navigation.navigate("Home");
+      }
+    } else {
       alert("Usuário ou senha inválidos");
     }
   }
