@@ -23,6 +23,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flex: 1,
   },
+  activeIcon: {
+  },
 });
 
 export default styles;
