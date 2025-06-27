@@ -1,23 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Svg, { Defs, Pattern, Rect, Circle } from "react-native-svg";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styles from "./home.styles";
 import Menu from "../../components/menu";
+import useHome from "./home.hook";
 import { COLORS } from "../../constants/colors";
 
 export interface HomeProps {
   navigation: any;
 }
 
-const turmas = [
+interface Turma {
+  nome: string;
+}
+
+const turmasDefault: Turma[] = [
   { nome: "React Native Basics" },
   { nome: "JavaScript Essencial" },
   { nome: "UI/UX para Iniciantes" },
-  { nome: "APIs com Node.js" },
-  { nome: "APIs com Node.js" },
-  { nome: "APIs com Node.js" },
+  { nome: "A" },
+  { nome: "B" },
+  { nome: "C" },
 ];
 
 const gradients = [
@@ -52,10 +57,28 @@ const DotPattern = () => (
 
 const Home: React.FC<HomeProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets();
+  const [loading, setLoading] = useState(true);
+  const { turmas, handleRequest } = useHome({ navigation, id_aluno: 9 });
+
+  useEffect(() => {
+    const fetchTurmas = async () => {
+      setLoading(true);
+      try {
+        await handleRequest();
+      } catch (error) {
+        console.error("Erro ao buscar turmas:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchTurmas();
+  }, []);
 
   const handlePress = (turma: string) => {
     navigation.navigate("Login", { turma });
   };
+
+  const turmasToShow = turmas.length > 0 ? turmas : (loading ? [] : turmasDefault);
 
   return (
     <>
@@ -70,11 +93,11 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
         }}
         style={{ flex: 1, backgroundColor: COLORS.background }} // mesma cor do menu
       >
-        {turmas.map((turma, index) => (
+        {turmasToShow.map((turma: Turma, index: number) => (
           <TouchableOpacity
-            key={index}
+            key={`${turma.nome}-${index}`}
             style={styles.courseCard}
-            onPress={(e) => handlePress(turma.nome)}
+            onPress={() => handlePress(turma.nome)}
           >
             <LinearGradient
               colors={getGradientColors(index)}
