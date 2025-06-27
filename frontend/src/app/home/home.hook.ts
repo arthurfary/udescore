@@ -5,7 +5,7 @@ interface Turma {
   nome: string;
 }
 
-const useHome = ({ navigation, id_aluno }: any) => {
+const useHome = ({ id_aluno }: any) => {
   const [turmas, setTurmas] = useState<Turma[]>([]);
 
   async function handleRequest() {
