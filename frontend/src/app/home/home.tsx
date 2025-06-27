@@ -13,15 +13,6 @@ interface Turma {
   nome: string;
 }
 
-const turmasDefault: Turma[] = [
-  { nome: "React Native Basics" },
-  { nome: "JavaScript Essencial" },
-  { nome: "UI/UX para Iniciantes" },
-  { nome: "APIs com Node.js, sem usar o ChatGPT" },
-  { nome: "APIs com Node.js" },
-  { nome: "APIs com Node.js" },
-];
-
 const gradients = [
   ["#6C63FF", "#A594F9"],
   ["#FF6584", "#FFB5A7"],
@@ -76,7 +67,7 @@ const Home: React.FC = () => {
     alert("Clicou no curso da turma: " + turma);
   };
 
-  const turmasToShow = turmas.length > 0 ? turmas : (loading ? [] : turmasDefault);
+  const turmasToShow = turmas.length > 0 ? turmas : loading ? [] : [];
 
   return (
     <>
@@ -91,6 +82,13 @@ const Home: React.FC = () => {
         }}
         style={{ flex: 1, backgroundColor: COLORS.background }} // mesma cor do menu
       >
+        {turmasToShow.length === 0 && !loading && (
+          <Text
+            style={{ color: COLORS.text, fontSize: 25, textAlign: "center" }}
+          >
+            Você não está em nenhuma turma.
+          </Text>
+        )}
         {turmasToShow.map((turma: Turma, index: number) => (
           <TouchableOpacity
             key={`${turma.nome}-${index}`}
