@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: "hidden",
     elevation: 8,
-    shadowColor: "#000",
+    shadowColor: COLORS.shadow,
     width: "90%",
     shadowOffset: {
       width: 0,
@@ -36,11 +36,11 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "#00000022",
+    backgroundColor: COLORS.overlay,
     borderRadius: 20,
   },
   courseLabel: {
-    backgroundColor: "#000000CC",
+    backgroundColor: COLORS.modalBackground,
     paddingHorizontal: 20,
     paddingVertical: 12,
     borderRadius: 25,

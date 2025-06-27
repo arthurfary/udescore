@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { COLORS } from "../../constants/colors";
+import { FONT_SIZES } from "../../constants/font-sizes";
 
 const styles = StyleSheet.create({
   container: {
@@ -19,13 +20,13 @@ const styles = StyleSheet.create({
   },
 
   userHighlight: {
-    backgroundColor: "#ffffff10", // leve destaque
-    borderColor: "#00ffcc",
+    backgroundColor: COLORS.highlightBackground,
+    borderColor: COLORS.highlight,
     borderWidth: 1,
   },
 
   positionText: {
-    fontSize: 18,
+    fontSize: FONT_SIZES.subtitle,
     fontWeight: "bold",
     minWidth: 32,
     textAlign: "center",
@@ -36,33 +37,33 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 18,
-    backgroundColor: "#fff",
+    backgroundColor: COLORS.text,
   },
 
   nameText: {
-    color: "#fff",
-    fontSize: 16,
+    color: COLORS.text,
+    fontSize: FONT_SIZES.body,
     fontWeight: "500",
   },
 
   userNameText: {
     fontWeight: "bold",
-    color: "#00ffcc",
+    color: COLORS.highlight,
   },
 
   pointsText: {
-    color: "#fff",
-    fontSize: 14,
+    color: COLORS.text,
+    fontSize: FONT_SIZES.caption,
     fontWeight: "600",
   },
 
   userPointsText: {
-    color: "#00ffcc",
+    color: COLORS.highlight,
   },
   title: {
-    fontSize: 28,
+    fontSize: FONT_SIZES.display,
     fontWeight: "bold",
-    color: "#fff",
+    color: COLORS.text,
     textAlign: "center",
     marginBottom: 32,
     fontFamily: "serif",
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
   },
   separatorLine: {
     height: 1,
-    backgroundColor: "#fff",
+    backgroundColor: COLORS.text,
     width: "80%",
     opacity: 0.3,
   },
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 18,
-    backgroundColor: "#fff",
+    backgroundColor: COLORS.text,
     justifyContent: "center",
     alignItems: "center",
   },
