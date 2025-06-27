@@ -34,31 +34,23 @@ const Professor: React.FC<{ navigation: any }> = ({ navigation }) => {
       />
       <Text style={styles.nome}>{user?.nome}</Text>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={redirectRank}>
         <FontAwesome5 name="trophy" size={16} color="#fff" />
-        <Text style={styles.buttonText} onPress={redirectRank}>
-          Ranking
-        </Text>
+        <Text style={styles.buttonText}>Ranking</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={redirectTurmas}>
         <MaterialIcons name="school" size={16} color="#fff" />
-        <Text style={styles.buttonText} onPress={redirectTurmas}>
-          Turmas
-        </Text>
+        <Text style={styles.buttonText}>Turmas</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={redirectCriarTurma}>
         <Entypo name="plus" size={16} color="#fff" />
-        <Text style={styles.buttonText} onPress={redirectCriarTurma}>
-          Criar nova turma
-        </Text>
+        <Text style={styles.buttonText}>Criar nova turma</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.exitButton}>
-        <Text style={styles.exitText} onPress={logout}>
-          Sair
-        </Text>
+      <TouchableOpacity style={styles.exitButton} onPress={logout}>
+        <Text style={styles.exitText}>Sair</Text>
       </TouchableOpacity>
     </ScrollView>
   );

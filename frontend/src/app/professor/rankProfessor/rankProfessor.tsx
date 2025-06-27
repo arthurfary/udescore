@@ -66,13 +66,11 @@ const RankProfessor: React.FC<{ navigation: any }> = ({ navigation }) => {
   return (
     <>
       <View style={styles.container}>
-        <TouchableOpacity style={styles.exitButton}>
-          <Text
-            style={styles.exitText}
-            onPress={() => navigation.navigate("Professor")}
-          >
-            Voltar
-          </Text>
+        <TouchableOpacity
+          style={styles.exitButton}
+          onPress={() => navigation.navigate("Professor")}
+        >
+          <Text style={styles.exitText}>Voltar</Text>
         </TouchableOpacity>
         <ScrollView
           style={styles.scrollView}

@@ -72,13 +72,11 @@ const ProfessorTurmas: React.FC<{ navigation: any }> = ({ navigation }) => {
         }}
         style={{ flex: 1, backgroundColor: COLORS.background }}
       >
-        <TouchableOpacity style={styles.exitButton}>
-          <Text
-            style={styles.exitText}
-            onPress={() => navigation.navigate("Professor")}
-          >
-            Voltar
-          </Text>
+        <TouchableOpacity
+          style={styles.exitButton}
+          onPress={() => navigation.navigate("Professor")}
+        >
+          <Text style={styles.exitText}>Voltar</Text>
         </TouchableOpacity>
         <Text style={styles.pageTitle}>Turmas do Professor</Text>
 
@@ -105,11 +103,9 @@ const ProfessorTurmas: React.FC<{ navigation: any }> = ({ navigation }) => {
           ))
         )}
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={redirectCriarTurma}>
           <Entypo name="plus" size={16} color="#fff" />
-          <Text style={styles.buttonText} onPress={redirectCriarTurma}>
-            Criar nova turma
-          </Text>
+          <Text style={styles.buttonText}>Criar nova turma</Text>
         </TouchableOpacity>
       </ScrollView>
     </>

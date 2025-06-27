@@ -72,13 +72,11 @@ const CriarTurma: React.FC<{ navigation: any }> = ({ navigation }) => {
         ))}
       </ScrollView>
 
-      <TouchableOpacity style={styles.btnSair}>
-        <Text
-          style={styles.btnText}
-          onPress={() => navigation.navigate("ProfessorTurmas")}
-        >
-          Cancelar
-        </Text>
+      <TouchableOpacity
+        style={styles.btnSair}
+        onPress={() => navigation.navigate("ProfessorTurmas")}
+      >
+        <Text style={styles.btnText}>Cancelar</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.btnCriar} onPress={handleCriar}>
