@@ -10,6 +10,7 @@ import Professor from "./src/app/professor";
 import RankProfessor from "./src/app/professor/rankProfessor";
 import ProfessorTurmas from "./src/app/professor/turmas";
 import CriarTurma from "./src/app/professor/criarTurma";
+import Perfil from "./src/app/perfil";
 
 import * as SystemUI from "expo-system-ui";
 import { useEffect } from "react";
@@ -23,6 +24,11 @@ export type RootStackParamList = {
   Login: undefined;
   Home: undefined;
   Rank: undefined;
+  Professor: undefined;
+  RankProfessor: undefined;
+  ProfessorTurmas: undefined;
+  CriarTurma: undefined;
+  Perfil: undefined;
 };
 
 export default function App() {
@@ -46,6 +52,7 @@ export default function App() {
             <Stack.Screen name="RankProfessor" component={RankProfessor} />
             <Stack.Screen name="ProfessorTurmas" component={ProfessorTurmas} />
             <Stack.Screen name="CriarTurma" component={CriarTurma} />
+            <Stack.Screen name="Perfil" component={Perfil} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaProvider>
