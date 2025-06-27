@@ -1,33 +1,60 @@
-import { useState } from "react";
-import loginService from "../../services/login";
+import { useEffect, useState } from "react";
+import rankService from "../../services/rank";
 
-const useLogin = ({ navigation }: any) => {
-  const [activeForm, setActiveForm] = useState<"login" | "newUser" | null>(
-    null
-  );
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+interface RankData {
+  id_aluno: number;
+  nome: string;
+  total_pontos: number;
+  position: number;
+}
 
-  async function handleSubmit() {
-    const result = await loginService.login(userName, password);
-    console.log("🚀 ~ handleSubmit ~ result:", result);
+const useRank = ({ id_aluno }: { id_aluno: string | undefined}) => {
+  const [rankData, setRankData] = useState<RankData[]>([]);
+  const [top10Data, setTop10Data] = useState<RankData[]>([]);
+  const [loading, setLoading] = useState(false);
 
-    if (result.status == true) navigation.navigate("Home");
-    else {
-      alert("Usuário ou senha inválidos");
+  async function handleRequest() {
+    try {
+      setLoading(true);
+
+      const userResult = await rankService.getUserRanking(id_aluno);
+      console.log("ID Aluno: ", id_aluno, "🚀 ~ handleRequest ~ userResult:", userResult);
+      if (userResult.status === true && userResult.data) {
+        setRankData(userResult.data.data);
+      }
+
+      try{
+        const top10Result = await rankService.getTop10Ranking();
+        console.log("🚀 ~ handleRequest ~ top10Result:", top10Result);
+        if (top10Result.status === true && top10Result.data) {
+          setTop10Data(top10Result.data.data);
+        }
+      } catch (top10Error){
+          console.log("Top 10 não disponível, usando dados padrão");
+      }
+
+      return { success: true, userData: userResult.data, top10: top10Data };
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+      alert("Erro na requisição");
+      return { success: false, data: null };
+    } finally {
+      setLoading(false);
     }
   }
 
-  // Add your business logic here
+  useEffect(() => {
+    if (id_aluno) {
+      handleRequest();
+    }
+  }, []);
+  
   return {
-    activeForm,
-    userName,
-    password,
-    setActiveForm,
-    setUserName,
-    setPassword,
-    handleSubmit,
+    rankData,
+    top10Data,
+    loading,
+    handleRequest,
   };
 };
 
-export default useLogin;
+export default useRank;

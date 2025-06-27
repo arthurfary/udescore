@@ -4,57 +4,39 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styles from "./rank.styles";
 import Menu from "../../components/menu";
 import { FontAwesome } from "@expo/vector-icons";
+import useRank from "./rank.hook";
+import { useAuth } from "../../context/userContext";
 
-const top10 = [
-  { nome: "OOOOOOOOOOOOOOO", pontos: 100 },
-  { nome: "JavaScript Essencial", pontos: 90 },
-  { nome: "UI/UX para Iniciantes", pontos: 80 },
-  { nome: "APIs com Node.js", pontos: 70 },
-  { nome: "APIs com Node.js", pontos: 60 },
-  { nome: "APIs com Node.js", pontos: 50 },
-  { nome: "APIs com Node.js", pontos: 40 },
-  { nome: "APIs com Node.js", pontos: 30 },
-  { nome: "APIs com Node.js", pontos: 20 },
-  { nome: "APIs com Node.js", pontos: 10 },
-];
+interface RankProps {
+  navigation?: any;
+}
 
-const meuRanking = [
-  {
-    position: 13,
-    nome: "APIs com Node.js",
-    pontos: 5,
-  },
-  {
-    position: 14,
-    nome: "APIs com Node.js",
-    pontos: 4,
-  },
-  {
-    position: 15,
-    nome: "Seu Nome",
-    pontos: 3,
-  },
-  {
-    position: 16,
-    nome: "APIs com Node.js",
-    pontos: 2,
-  },
-  {
-    position: 17,
-    nome: "APIs com Node.js",
-    pontos: 1,
-  },
+const top10Default = [
+  { nome: "Usuário 1", pontos: 100, position: 1 },
+  { nome: "Usuário 2", pontos: 90, position: 2 },
+  { nome: "Usuário 3", pontos: 80, position: 3 },
+  { nome: "Usuário 4", pontos: 70, position: 4 },
+  { nome: "Usuário 5", pontos: 60, position: 5 },
+  { nome: "Usuário 6", pontos: 50, position: 6 },
+  { nome: "Usuário 7", pontos: 40, position: 7 },
+  { nome: "Usuário 8", pontos: 30, position: 8 },
+  { nome: "Usuário 9", pontos: 20, position: 9 },
+  { nome: "Usuário 10", pontos: 10, position: 10 },
 ];
 
 interface RankItem {
   position: number;
   nome: string;
-  pontos: number;
+  total_pontos: number;
   isUser?: boolean;
 }
 
 const Rank: React.FC = () => {
   const insets = useSafeAreaInsets();
+  const { user } = useAuth();
+  const { rankData: meuRanking, top10Data: top10, loading, handleRequest } = useRank({
+    id_aluno: user?.id,
+  });
   const meuRank = meuRanking[2];
 
   const rankingCompleto = [
@@ -108,7 +90,7 @@ const Rank: React.FC = () => {
           </Text>
         </View>
         <Text style={[styles.pointsText, item.isUser && styles.userPointsText]}>
-          {item.pontos} XP
+          {item.total_pontos} XP
         </Text>
       </View>
     );
