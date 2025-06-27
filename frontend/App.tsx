@@ -7,6 +7,7 @@ import Login from "./src/app/login";
 import Home from "./src/app/home";
 import Rank from "./src/app/rank";
 import Professor from "./src/app/professor";
+import RankProfessor from "./src/app/professor/rankProfessor";
 
 import * as SystemUI from "expo-system-ui";
 import { useEffect } from "react";
@@ -40,6 +41,7 @@ export default function App() {
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="Rank" component={Rank} />
             <Stack.Screen name="Professor" component={Professor} />
+            <Stack.Screen name="RankProfessor" component={RankProfessor} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaProvider>

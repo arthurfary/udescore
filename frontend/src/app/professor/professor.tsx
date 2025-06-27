@@ -4,16 +4,13 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styles from "./professor.styles";
 import { COLORS } from "../../constants/colors";
 import { useAuth } from "../../context/userContext";
-import {
-  FontAwesome5,
-  MaterialIcons,
-  Entypo,
-  FontAwesome,
-} from "@expo/vector-icons";
+import { FontAwesome5, MaterialIcons, Entypo } from "@expo/vector-icons";
+import useHooks from "./professor.hook";
 
-const Professor: React.FC = () => {
+const Professor: React.FC<{ navigation: any }> = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const { user } = useAuth();
+  const { logout, redirectRank } = useHooks({ navigation });
 
   return (
     <ScrollView
@@ -37,7 +34,9 @@ const Professor: React.FC = () => {
 
       <TouchableOpacity style={styles.button}>
         <FontAwesome5 name="trophy" size={16} color="#fff" />
-        <Text style={styles.buttonText}>Ranking</Text>
+        <Text style={styles.buttonText} onPress={redirectRank}>
+          Ranking
+        </Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button}>
@@ -50,13 +49,10 @@ const Professor: React.FC = () => {
         <Text style={styles.buttonText}>Criar nova turma</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button}>
-        <MaterialIcons name="sports-esports" size={16} color="#fff" />
-        <Text style={styles.buttonText}>Criar novo jogo</Text>
-      </TouchableOpacity>
-
       <TouchableOpacity style={styles.exitButton}>
-        <Text style={styles.exitText}>Sair</Text>
+        <Text style={styles.exitText} onPress={logout}>
+          Sair
+        </Text>
       </TouchableOpacity>
     </ScrollView>
   );
