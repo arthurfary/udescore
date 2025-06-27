@@ -7,6 +7,7 @@ import styles from "./turmas.styles";
 import { COLORS } from "../../../constants/colors";
 import { Entypo } from "@expo/vector-icons";
 import useHooks from "../professor.hook";
+import useTurmas from "./turmas.hook";
 
 interface Turma {
   nome: string;
@@ -19,14 +20,6 @@ const gradients = [
   ["#43C6AC", "#191654"],
   ["#8E2DE2", "#4A00E0"],
 ] as const;
-
-const turmas: Turma[] = [
-  { nome: "Turma A - Matemática" },
-  { nome: "Turma B - Física" },
-  { nome: "Turma C - Química" },
-  { nome: "Turma D - Biologia" },
-  { nome: "Turma E - História" },
-];
 
 const getGradientColors = (index: number) =>
   gradients[index % gradients.length];
@@ -58,6 +51,8 @@ const ProfessorTurmas: React.FC<{ navigation: any }> = ({ navigation }) => {
   };
 
   const { redirectCriarTurma } = useHooks({ navigation });
+
+  const { turmas } = useTurmas();
 
   return (
     <>
