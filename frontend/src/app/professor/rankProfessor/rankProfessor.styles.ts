@@ -1,13 +1,13 @@
 import { StyleSheet } from "react-native";
-import { COLORS } from "../../constants/colors";
-import { FONT_SIZES } from "../../constants/font-sizes";
+import { COLORS } from "../../../constants/colors";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.background,
-    paddingTop: 100,
+    paddingTop: 20,
     paddingHorizontal: 16,
+    alignItems: "center",
   },
   rankItem: {
     flexDirection: "row",
@@ -20,13 +20,13 @@ const styles = StyleSheet.create({
   },
 
   userHighlight: {
-    backgroundColor: COLORS.highlightBackground,
-    borderColor: COLORS.highlight,
+    backgroundColor: "#ffffff10", // leve destaque
+    borderColor: "#00ffcc",
     borderWidth: 1,
   },
 
   positionText: {
-    fontSize: FONT_SIZES.subtitle,
+    fontSize: 18,
     fontWeight: "bold",
     minWidth: 32,
     textAlign: "center",
@@ -37,33 +37,33 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 18,
-    backgroundColor: COLORS.text,
+    backgroundColor: "#fff",
   },
 
   nameText: {
-    color: COLORS.text,
-    fontSize: FONT_SIZES.body,
+    color: "#fff",
+    fontSize: 16,
     fontWeight: "500",
   },
 
   userNameText: {
     fontWeight: "bold",
-    color: COLORS.highlight,
+    color: "#00ffcc",
   },
 
   pointsText: {
-    color: COLORS.text,
-    fontSize: FONT_SIZES.caption,
+    color: "#fff",
+    fontSize: 14,
     fontWeight: "600",
   },
 
   userPointsText: {
-    color: COLORS.highlight,
+    color: "#00ffcc",
   },
   title: {
-    fontSize: FONT_SIZES.display,
+    fontSize: 28,
     fontWeight: "bold",
-    color: COLORS.text,
+    color: "#fff",
     textAlign: "center",
     marginBottom: 32,
     fontFamily: "serif",
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   separatorLine: {
     height: 1,
-    backgroundColor: COLORS.text,
+    backgroundColor: "#fff",
     width: "80%",
     opacity: 0.3,
   },
@@ -99,9 +99,27 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 18,
-    backgroundColor: COLORS.text,
+    backgroundColor: "#fff",
     justifyContent: "center",
     alignItems: "center",
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 15,
+    fontWeight: "bold",
+  },
+  exitButton: {
+    marginTop: 40,
+    backgroundColor: "#821E1E",
+    width: "90%",
+    paddingVertical: 14,
+    borderRadius: 12,
+    alignItems: "center",
+  },
+  exitText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 15,
   },
 });
 

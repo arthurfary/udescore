@@ -11,61 +11,62 @@ try {
 
     $id_aluno = $api->obterParametro("id_aluno");
 
-    $query = " WITH ranking AS (
+    $query = "WITH ranking AS (
                 SELECT 
                     questionario_aluno.id_aluno,
                     usuario.nome,
                     SUM(questionario_aluno.pontos) AS total_pontos,
-                    ROW_NUMBER() OVER (ORDER BY SUM(questionario_aluno.pontos) DESC) AS posicao
+                    ROW_NUMBER() OVER (ORDER BY SUM(questionario_aluno.pontos) DESC) AS position
                 FROM questionario_aluno
                 JOIN usuario ON usuario.id = questionario_aluno.id_aluno
                 GROUP BY questionario_aluno.id_aluno, usuario.nome
             ),
             posicao_aluno AS (
-                SELECT posicao FROM ranking WHERE id_aluno = :id_aluno
+                SELECT position FROM ranking WHERE id_aluno = :id_aluno
             )
             SELECT * FROM ranking
-            WHERE posicao BETWEEN (SELECT posicao FROM posicao_aluno) - 2 
-                            AND (SELECT posicao FROM posicao_aluno) + 2
-            ORDER BY posicao
+            WHERE position BETWEEN (SELECT position FROM posicao_aluno) - 2 
+                                AND (SELECT position FROM posicao_aluno) + 2
+            ORDER BY position
         ";
 
-    $parameters = [
-        ":id_aluno" => $id_aluno,
-    ];
-
+    $parameters = [ ":id_aluno" => $id_aluno ];
     $resposta = $db->query($query, $parameters);
 
-    $data = [
-        "aluno-2" => null,
-        "aluno-1" => null,
-        "aluno"   => null,
-        "aluno+1" => null,
-        "aluno+2" => null,
+    // Objeto vazio padrão
+    $nullObj = [
+        "id_aluno" => null,
+        "nome" => "null",
+        "total_pontos" => null,
+        "position" => null
     ];
-    
-    // Procura o índice do aluno na lista
-    $index = null;
+
+    // Encontrar o índice do aluno
+    $alunoIndex = null;
     foreach ($resposta as $i => $row) {
-        if ($row['id_aluno'] == $id_aluno) {
-            $index = $i;
+        if ($row["id_aluno"] == $id_aluno) {
+            $alunoIndex = $i;
             break;
         }
     }
-    
-    if ($index !== null) {
-        $data["aluno"] = $resposta[$index] ?? null;
-        $data["aluno-1"] = $resposta[$index - 1] ?? null;
-        $data["aluno-2"] = $resposta[$index - 2] ?? null;
-        $data["aluno+1"] = $resposta[$index + 1] ?? null;
-        $data["aluno+2"] = $resposta[$index + 2] ?? null;
+
+    // Inicializa o array com objetos nulos
+    $data = [$nullObj, $nullObj, $nullObj, $nullObj, $nullObj];
+
+    if ($alunoIndex !== null) {
+        // aluno no centro (índice 2)
+        $data[2] = $resposta[$alunoIndex] ?? $nullObj;
+        $data[1] = $resposta[$alunoIndex - 1] ?? $nullObj;
+        $data[0] = $resposta[$alunoIndex - 2] ?? $nullObj;
+        $data[3] = $resposta[$alunoIndex + 1] ?? $nullObj;
+        $data[4] = $resposta[$alunoIndex + 2] ?? $nullObj;
     }
-    
+
     $api->sendResponse(200, [
         "success" => true,
-        "data" => $data,
+        "data" => $data
     ]);
-    
+
 } catch (Exception $e) {
     $db->TRollback();
     $api->tratarException($e);

@@ -1,33 +1,32 @@
-import { useState } from "react";
-import loginService from "../../services/login";
+import { useAuth } from "../../context/userContext";
 
-const useLogin = ({ navigation }: any) => {
-  const [activeForm, setActiveForm] = useState<"login" | "newUser" | null>(
-    null
-  );
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+const useHooks = ({ navigation }: any) => {
+  const { setUser } = useAuth();
 
-  async function handleSubmit() {
-    const result = await loginService.login(userName, password);
-    console.log("🚀 ~ handleSubmit ~ result:", result);
+  const logout = async () => {
+    setUser(null);
+    navigation.navigate("Login");
+  };
 
-    if (result.status == true) navigation.navigate("Home");
-    else {
-      alert("Usuário ou senha inválidos");
-    }
-  }
+  const redirectRank = async () => {
+    navigation.navigate("RankProfessor");
+  };
+
+  const redirectTurmas = async () => {
+    navigation.navigate("ProfessorTurmas");
+  };
+
+  const redirectCriarTurma = async () => {
+    navigation.navigate("CriarTurma");
+  };
 
   // Add your business logic here
   return {
-    activeForm,
-    userName,
-    password,
-    setActiveForm,
-    setUserName,
-    setPassword,
-    handleSubmit,
+    logout,
+    redirectRank,
+    redirectTurmas,
+    redirectCriarTurma,
   };
 };
 
-export default useLogin;
+export default useHooks;

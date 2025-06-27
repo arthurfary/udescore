@@ -1,13 +1,19 @@
 import { StyleSheet } from "react-native";
-import { COLORS } from "../../constants/colors";
-import { FONT_SIZES } from "../../constants/font-sizes";
+import { COLORS } from "../../../constants/colors";
+import { FONT_SIZES } from "../../../constants/font-sizes";
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: COLORS.background,
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+  pageTitle: {
+    fontSize: FONT_SIZES.title,
+    color: COLORS.text,
+    fontWeight: "bold",
+    marginBottom: 24,
+  },
+  emptyMessage: {
+    fontSize: FONT_SIZES.caption,
+    color: COLORS.text,
+    textAlign: "center",
+    marginTop: 40,
   },
   courseCard: {
     marginBottom: 20,
@@ -56,6 +62,37 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     letterSpacing: 0.5,
+  },
+  button: {
+    width: "90%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 14,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: COLORS.text,
+    marginBottom: 16,
+    backgroundColor: "transparent",
+    gap: 8,
+  },
+  buttonText: {
+    color: COLORS.text,
+    fontSize: FONT_SIZES.body,
+    fontWeight: "bold",
+  },
+  exitButton: {
+    marginBottom: 40,
+    backgroundColor: "#821E1E",
+    width: "90%",
+    paddingVertical: 14,
+    borderRadius: 12,
+    alignItems: "center",
+  },
+  exitText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 15,
   },
 });
 
