@@ -1,15 +1,9 @@
 import React from "react";
-import {
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-  FlatList,
-  Image,
-} from "react-native";
+import { ScrollView, Text, View, FlatList } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styles from "./rank.styles";
 import Menu from "../../components/menu";
+import { FontAwesome } from "@expo/vector-icons";
 
 const top10 = [
   { nome: "OOOOOOOOOOOOOOO", pontos: 100 },
@@ -63,93 +57,63 @@ const Rank: React.FC = () => {
   const insets = useSafeAreaInsets();
   const meuRank = meuRanking[2];
 
-  // Combina todos os ranks (com posição explícita)
   const rankingCompleto = [
     ...top10.map((item, index) => ({ ...item, position: index + 1 })),
     ...meuRanking,
   ];
 
-  // Evita duplicação do usuário
   const filtrado = rankingCompleto.filter(
     (aluno, index, self) =>
       index === self.findIndex((a) => a.position === aluno.position)
   );
 
-  // Lógica para mostrar ao redor do usuário
   let extraRanking: typeof meuRanking = [];
   if (meuRank) {
     const pos = meuRank.position;
-
     extraRanking = filtrado.filter((aluno) => {
-      // Sempre mostrar o próprio
       if (aluno.nome === meuRank.nome && meuRank.position > 10) return true;
-
-      // Mostrar 2 atrás, se posição < 10
       if (
         (aluno.position == pos + 1 || aluno.position == pos + 2) &&
         aluno.position > 10
-      ) {
+      )
         return true;
-      }
-      // Mostrar 2 à frente, apenas se posição > 10
       if (
         (aluno.position == pos - 1 || aluno.position == pos - 2) &&
         aluno.position > 10
-      ) {
+      )
         return true;
-      }
-
       return false;
     });
-
-    // Ordenar por posição crescente
     extraRanking.sort((a, b) => a.position - b.position);
   }
 
-  // Função para obter cor baseada na posição
-  const getColorByPosition = (position: number) => {
-    switch (position) {
-      case 1:
-        return "#FFD700"; // Ouro
-      case 2:
-        return "#C0C0C0"; // Prata
-      case 3:
-        return "#CD7F32"; // Bronze
-      default:
-        return "#FFFFFF"; // Branco
-    }
+  const positionColors: { [key: number]: string } = {
+    1: "#FFD700",
+    2: "#C0C0C0",
+    3: "#CD7F32",
   };
 
-  // Renderizar item do ranking
   const renderRankItem = ({ item }: { item: RankItem }) => {
-    const positionColor = getColorByPosition(item.position);
-    const nameColor = getColorByPosition(item.position);
-    const pointsColor = getColorByPosition(item.position);
+    const color = positionColors[item.position] || "#FFFFFF";
 
     return (
-      <View style={[styles.rankItem, item.isUser && styles.userRankItem]}>
-        <Text style={[styles.position, { color: positionColor }]}>
-          #{item.position}
-        </Text>
-
-        <Text
-          style={[
-            styles.name,
-            { color: nameColor },
-            item.isUser && styles.userName,
-          ]}
-        >
-          {item.nome}
-        </Text>
-
-        <Text style={[styles.points, { color: pointsColor }]}>
-          {item.pontos} Pts
+      <View style={[styles.rankItem, item.isUser && styles.userHighlight]}>
+        <View style={styles.left}>
+          <Text style={[styles.positionText, { color }]}>{item.position}</Text>
+          <View style={styles.avatarIcon}>
+            <FontAwesome name="user" size={20} color="#000" />
+          </View>
+          <Text style={[styles.nameText, item.isUser && styles.userNameText]}>
+            {item.nome}
+          </Text>
+        </View>
+        <Text style={[styles.pointsText, item.isUser && styles.userPointsText]}>
+          {item.pontos} XP
         </Text>
       </View>
     );
   };
 
-  // Preparar dados para o FlatList
   const top10Data = top10.map((item, index) => ({
     ...item,
     position: index + 1,
@@ -170,7 +134,6 @@ const Rank: React.FC = () => {
           style={styles.scrollView}
           contentContainerStyle={styles.scrollContent}
         >
-          {/* Top 10 */}
           <FlatList
             data={top10Data}
             renderItem={renderRankItem}
@@ -178,14 +141,12 @@ const Rank: React.FC = () => {
             scrollEnabled={false}
           />
 
-          {/* Separador se houver ranking extra */}
           {extraData.length > 0 && (
             <View style={styles.separator}>
               <View style={styles.separatorLine} />
             </View>
           )}
 
-          {/* Ranking extra (ao redor do usuário) */}
           <FlatList
             data={extraData}
             renderItem={renderRankItem}
