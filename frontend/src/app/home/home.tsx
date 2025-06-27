@@ -7,6 +7,7 @@ import styles from "./home.styles";
 import Menu from "../../components/menu";
 import useHome from "./home.hook";
 import { COLORS } from "../../constants/colors";
+import { useAuth } from "../../context/userContext";
 
 interface Turma {
   nome: string;
@@ -54,7 +55,8 @@ const DotPattern = () => (
 const Home: React.FC = () => {
   const insets = useSafeAreaInsets();
   const [loading, setLoading] = useState(true);
-  const { turmas, handleRequest } = useHome({ id_aluno: 9 });
+  const { user } = useAuth();
+  const { turmas, handleRequest } = useHome({ id_aluno: user?.id });
 
   useEffect(() => {
     const fetchTurmas = async () => {

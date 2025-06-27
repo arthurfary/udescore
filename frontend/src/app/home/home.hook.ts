@@ -12,7 +12,7 @@ const useHome = ({ id_aluno }: any) => {
     try {
       const result = await homeService.home(id_aluno);
 
-      console.log("🚀 ~ handleRequest ~ result:", result);
+      console.log("ID Aluno: ", id_aluno, "🚀 ~ handleRequest ~ result:", result);
       if (result.status == true) {
         setTurmas(result.data.data);
         return { success: true, data: result.data.data }; // data.data é o array de turmas
