@@ -3,75 +3,134 @@ import { COLORS } from "../../constants/colors";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLORS.background,
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: COLORS.background,
+    paddingHorizontal: 16,
+    paddingTop: 100,
   },
-  courseCard: {
-    marginBottom: 20,
-    borderRadius: 20,
-    overflow: "hidden",
-    elevation: 8,
-    shadowColor: "#000",
-    width: "90%",
-    backgroundColor: COLORS.terciary,
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-  },
-  courseBackground: {
-    height: 140,
-    width: "100%",
-    position: "relative",
-    justifyContent: "flex-end",
-    borderRadius: 20,
-  },
-  courseLabel: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 16,
-  },
-  myLabel: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 16,
-    backgroundColor: COLORS.quaternary,
-  },
-  position: {
-    color: "#ffffff",
+
+  title: {
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
-    width: 50,
+    marginBottom: 20,
+    color: COLORS.text || "#FFFFFF",
   },
-  courseName: {
-    color: "#ffffff",
+
+  scrollView: {
+    flex: 1,
+  },
+
+  scrollContent: {
+    paddingBottom: 100, // Margem inferior para não ficar atrás do menu
+  },
+
+  rankItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    marginVertical: 4,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.2)",
+  },
+
+  // Estilo especial para destacar o item do usuário
+  userRankItem: {
+    backgroundColor: COLORS.quaternary,
+    borderColor: COLORS.quaternary,
+    borderWidth: 2,
+    shadowColor: COLORS.quaternary,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+
+  position: {
     fontSize: 16,
     fontWeight: "bold",
-    textAlign: "center",
-    letterSpacing: 0.5,
-  },
-  coursePoints: {
-    color: "#ffffff",
-    fontSize: 14,
+    width: 50,
     textAlign: "center",
   },
-  title: {
-    color: COLORS.text,
-    fontSize: 32,
+
+  name: {
+    flex: 1,
+    fontSize: 16,
+    fontWeight: "500",
+    marginLeft: 16,
+  },
+
+  // Estilo especial para destacar o nome do usuário
+  userName: {
     fontWeight: "bold",
-    marginBottom: 40,
-    textAlign: "center",
+    fontSize: 18,
+    color: "#FFFFFF",
+    textShadowColor: "rgba(0, 122, 255, 0.8)",
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
+  },
+
+  points: {
+    fontSize: 14,
+    fontWeight: "bold",
+    textAlign: "right",
+    minWidth: 60,
+  },
+
+  separator: {
+    height: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    marginVertical: 15,
+  },
+
+  separatorLine: {
     width: "100%",
-    paddingHorizontal: 16,
+    height: 1,
+    backgroundColor: "rgba(255, 255, 255, 0.3)",
+  },
+
+  // Estilos antigos mantidos para compatibilidade (caso ainda sejam referenciados)
+  courseCard: {
+    width: "100%",
+    marginBottom: 8,
+  },
+
+  courseLabel: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    padding: 12,
+    borderRadius: 8,
+  },
+
+  myLabel: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 122, 255, 0.2)",
+    padding: 12,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#007AFF",
+  },
+
+  courseName: {
+    flex: 1,
+    fontSize: 16,
+    color: "#FFFFFF",
+    marginLeft: 8,
+  },
+
+  coursePoints: {
+    fontSize: 14,
+    color: "#FFFFFF",
+    fontWeight: "bold",
   },
 });
 
