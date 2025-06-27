@@ -9,24 +9,25 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styles from "./rankProfessor.styles";
 import { FontAwesome } from "@expo/vector-icons";
+import useRank from "./rankProfessor.hook";
 
-const top10 = [
-  { nome: "OOOOOOOOOOOOOOO", pontos: 100 },
-  { nome: "JavaScript Essencial", pontos: 90 },
-  { nome: "UI/UX para Iniciantes", pontos: 80 },
-  { nome: "APIs com Node.js", pontos: 70 },
-  { nome: "APIs com Node.js", pontos: 60 },
-  { nome: "APIs com Node.js", pontos: 50 },
-  { nome: "APIs com Node.js", pontos: 40 },
-  { nome: "APIs com Node.js", pontos: 30 },
-  { nome: "APIs com Node.js", pontos: 20 },
-  { nome: "APIs com Node.js", pontos: 10 },
+const top10Default = [
+  { nome: "Usuário 1", pontos: 100, position: 1 },
+  { nome: "Usuário 2", pontos: 90, position: 2 },
+  { nome: "Usuário 3", pontos: 80, position: 3 },
+  { nome: "Usuário 4", pontos: 70, position: 4 },
+  { nome: "Usuário 5", pontos: 60, position: 5 },
+  { nome: "Usuário 6", pontos: 50, position: 6 },
+  { nome: "Usuário 7", pontos: 40, position: 7 },
+  { nome: "Usuário 8", pontos: 30, position: 8 },
+  { nome: "Usuário 9", pontos: 20, position: 9 },
+  { nome: "Usuário 10", pontos: 10, position: 10 },
 ];
 
 interface RankItem {
   position: number;
   nome: string;
-  pontos: number;
+  total_pontos: number;
   isUser?: boolean;
 }
 
@@ -39,7 +40,7 @@ const RankProfessor: React.FC<{ navigation: any }> = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const renderRankItem = ({ item }: { item: RankItem }) => {
     const color = positionColors[item.position] || "#FFFFFF";
-
+ 
     return (
       <View style={[styles.rankItem, item.isUser && styles.userHighlight]}>
         <View style={styles.left}>
@@ -52,16 +53,18 @@ const RankProfessor: React.FC<{ navigation: any }> = ({ navigation }) => {
           </Text>
         </View>
         <Text style={[styles.pointsText, item.isUser && styles.userPointsText]}>
-          {item.pontos} XP
+          {item.total_pontos} XP
         </Text>
       </View>
     );
   };
 
-  const top10Data = top10.map((item, index) => ({
-    ...item,
-    position: index + 1,
-  }));
+  const { rankData: meuRanking, top10Data: top10, loading, handleRequest
+    } = useRank();
+    const top10Data = top10.map((item, index) => ({
+      ...item,
+      position: index + 1,
+    }));
 
   return (
     <>
