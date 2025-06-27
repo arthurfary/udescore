@@ -1,11 +1,12 @@
 import { StyleSheet } from "react-native";
 import { COLORS } from "../../constants/colors";
+import { FONT_SIZES } from "../../constants/font-sizes";
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 22,
+    fontSize: FONT_SIZES.title,
     fontWeight: "bold",
-    color: "#fff",
+    color: COLORS.text,
     marginBottom: 24,
   },
   avatar: {
@@ -15,9 +16,9 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   nome: {
-    fontSize: 18,
+    fontSize: FONT_SIZES.subtitle,
     fontWeight: "bold",
-    color: "#fff",
+    color: COLORS.text,
     marginBottom: 32,
   },
   button: {
@@ -28,28 +29,28 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "#fff",
+    borderColor: COLORS.text,
     marginBottom: 16,
     backgroundColor: "transparent",
     gap: 8,
   },
   buttonText: {
-    color: "#fff",
-    fontSize: 15,
+    color: COLORS.text,
+    fontSize: FONT_SIZES.body,
     fontWeight: "bold",
   },
   exitButton: {
     marginTop: 40,
-    backgroundColor: "#821E1E",
+    backgroundColor: COLORS.error,
     width: "90%",
     paddingVertical: 14,
     borderRadius: 12,
     alignItems: "center",
   },
   exitText: {
-    color: "#fff",
+    color: COLORS.text,
     fontWeight: "bold",
-    fontSize: 15,
+    fontSize: FONT_SIZES.body,
   },
   icon: {
     marginBottom: 12,
