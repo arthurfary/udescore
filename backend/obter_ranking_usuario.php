@@ -30,13 +30,18 @@ try {
             ORDER BY position
         ";
 
-    $parameters = [
-        ":id_aluno" => $id_aluno,
-    ];
-
+    $parameters = [ ":id_aluno" => $id_aluno ];
     $resposta = $db->query($query, $parameters);
 
-    // Encontrar índice do aluno no resultado
+    // Objeto vazio padrão
+    $nullObj = [
+        "id_aluno" => null,
+        "nome" => "null",
+        "total_pontos" => null,
+        "position" => null
+    ];
+
+    // Encontrar o índice do aluno
     $alunoIndex = null;
     foreach ($resposta as $i => $row) {
         if ($row["id_aluno"] == $id_aluno) {
@@ -45,24 +50,21 @@ try {
         }
     }
 
-    $data = [null, null, null, null, null]; // posições fixas 0 a 4
+    // Inicializa o array com objetos nulos
+    $data = [$nullObj, $nullObj, $nullObj, $nullObj, $nullObj];
 
     if ($alunoIndex !== null) {
-        // Posição fixa do aluno será sempre o índice 2
-        $data[2] = $resposta[$alunoIndex];
-
-        // Preenche até 2 anteriores
-        if (isset($resposta[$alunoIndex - 1])) $data[1] = $resposta[$alunoIndex - 1];
-        if (isset($resposta[$alunoIndex - 2])) $data[0] = $resposta[$alunoIndex - 2];
-
-        // Preenche até 2 posteriores
-        if (isset($resposta[$alunoIndex + 1])) $data[3] = $resposta[$alunoIndex + 1];
-        if (isset($resposta[$alunoIndex + 2])) $data[4] = $resposta[$alunoIndex + 2];
+        // aluno no centro (índice 2)
+        $data[2] = $resposta[$alunoIndex] ?? $nullObj;
+        $data[1] = $resposta[$alunoIndex - 1] ?? $nullObj;
+        $data[0] = $resposta[$alunoIndex - 2] ?? $nullObj;
+        $data[3] = $resposta[$alunoIndex + 1] ?? $nullObj;
+        $data[4] = $resposta[$alunoIndex + 2] ?? $nullObj;
     }
 
     $api->sendResponse(200, [
         "success" => true,
-        "data" => $data,
+        "data" => $data
     ]);
 
 } catch (Exception $e) {
