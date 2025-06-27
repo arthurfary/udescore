@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import loginService from "../../services/login";
 import registerService from "../../services/register";
+import { useAuth } from "../../context/userContext";
 
 const useLogin = ({ navigation }: any) => {
   const [activeForm, setActiveForm] = useState<"login" | "newUser" | null>(
@@ -10,15 +11,23 @@ const useLogin = ({ navigation }: any) => {
   const [password, setPassword] = useState("");
   const [showWelcome, setShowWelcome] = useState(true);
 
+  const { setUser } = useAuth();
+
   async function handleSubmit() {
     const result = await loginService.login(userName, password);
     console.log("🚀 ~ handleSubmit ~ result:", result);
 
     if (result.status == true) {
-      const tipoUsuario = result.data.data.tipo;
-      if (tipoUsuario == "p") {
+      const userInfo = result.data.data;
+      setUser({
+        id: userInfo.id,
+        nome: userInfo.nome,
+        tipo: userInfo.tipo,
+      });
+
+      if (userInfo.tipo === "p") {
         navigation.navigate("Professor");
-      } else if (tipoUsuario == "a") {
+      } else if (userInfo.tipo === "a") {
         navigation.navigate("Home");
       }
     } else {
@@ -31,7 +40,6 @@ const useLogin = ({ navigation }: any) => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Add your business logic here
   return {
     activeForm,
     userName,

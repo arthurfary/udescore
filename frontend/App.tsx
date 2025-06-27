@@ -12,6 +12,8 @@ import * as SystemUI from "expo-system-ui";
 import { useEffect } from "react";
 import { COLORS } from "./src/constants/colors";
 
+import { AuthProvider } from "./src/context/userContext";
+
 const Stack = createNativeStackNavigator();
 
 export type RootStackParamList = {
@@ -26,19 +28,21 @@ export default function App() {
   }, []);
 
   return (
-    <SafeAreaProvider>
-      <StatusBar style="auto" />
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Login"
-          screenOptions={{ headerShown: false }}
-        >
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Rank" component={Rank} />
-          <Stack.Screen name="Professor" component={Professor} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <AuthProvider>
+      <SafeAreaProvider>
+        <StatusBar style="auto" />
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="Login"
+            screenOptions={{ headerShown: false }}
+          >
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Rank" component={Rank} />
+            <Stack.Screen name="Professor" component={Professor} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </AuthProvider>
   );
 }

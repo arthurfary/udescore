@@ -6,8 +6,11 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styles from "./professor.styles";
 import { COLORS } from "../../constants/colors";
 
+import { useAuth } from "../../context/userContext";
+
 const Professor: React.FC = () => {
   const insets = useSafeAreaInsets();
+  const { user } = useAuth();
 
   return (
     <>
@@ -22,7 +25,7 @@ const Professor: React.FC = () => {
         }}
         style={{ flex: 1, backgroundColor: COLORS.background }}
       >
-        <Text>Teste</Text>
+        <Text>{user?.nome}</Text>
       </ScrollView>
     </>
   );
