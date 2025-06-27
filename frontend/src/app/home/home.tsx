@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Svg, { Defs, Pattern, Rect, Circle } from "react-native-svg";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styles from "./home.styles";
 import Menu from "../../components/menu";
+import useHome from "./home.hook";
 import { COLORS } from "../../constants/colors";
 
-const turmas = [
+interface Turma {
+  nome: string;
+}
+
+const turmasDefault: Turma[] = [
   { nome: "React Native Basics" },
   { nome: "JavaScript Essencial" },
   { nome: "UI/UX para Iniciantes" },
@@ -48,10 +53,28 @@ const DotPattern = () => (
 
 const Home: React.FC = () => {
   const insets = useSafeAreaInsets();
+  const [loading, setLoading] = useState(true);
+  const { turmas, handleRequest } = useHome({ id_aluno: 9 });
+
+  useEffect(() => {
+    const fetchTurmas = async () => {
+      setLoading(true);
+      try {
+        await handleRequest();
+      } catch (error) {
+        console.error("Erro ao buscar turmas:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchTurmas();
+  }, []);
 
   const handlePress = (turma: string) => {
     alert("Clicou no curso da turma: " + turma);
   };
+
+  const turmasToShow = turmas.length > 0 ? turmas : (loading ? [] : turmasDefault);
 
   return (
     <>
@@ -66,11 +89,11 @@ const Home: React.FC = () => {
         }}
         style={{ flex: 1, backgroundColor: COLORS.background }} // mesma cor do menu
       >
-        {turmas.map((turma, index) => (
+        {turmasToShow.map((turma: Turma, index: number) => (
           <TouchableOpacity
-            key={index}
+            key={`${turma.nome}-${index}`}
             style={styles.courseCard}
-            onPress={(e) => handlePress(turma.nome)}
+            onPress={() => handlePress(turma.nome)}
           >
             <LinearGradient
               colors={getGradientColors(index)}

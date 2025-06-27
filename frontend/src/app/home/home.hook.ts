@@ -1,33 +1,36 @@
 import { useState } from "react";
-import loginService from "../../services/login";
+import homeService from "../../services/home";
 
-const useLogin = ({ navigation }: any) => {
-  const [activeForm, setActiveForm] = useState<"login" | "newUser" | null>(
-    null
-  );
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+interface Turma {
+  nome: string;
+}
 
-  async function handleSubmit() {
-    const result = await loginService.login(userName, password);
-    console.log("🚀 ~ handleSubmit ~ result:", result);
+const useHome = ({ id_aluno }: any) => {
+  const [turmas, setTurmas] = useState<Turma[]>([]);
 
-    if (result.status == true) navigation.navigate("Home");
-    else {
-      alert("Usuário ou senha inválidos");
+  async function handleRequest() {
+    try {
+      const result = await homeService.home(id_aluno);
+
+      console.log("🚀 ~ handleRequest ~ result:", result);
+      if (result.status == true) {
+        setTurmas(result.data.data);
+        return { success: true, data: result.data.data }; // data.data é o array de turmas
+      } else {
+        alert("Erro ao buscar turmas");
+        return { success: false, data: [] };
+      }
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+      alert("Erro na requisição");
+      return { success: false, data: [] };
     }
   }
 
-  // Add your business logic here
   return {
-    activeForm,
-    userName,
-    password,
-    setActiveForm,
-    setUserName,
-    setPassword,
-    handleSubmit,
+    turmas,
+    handleRequest,
   };
 };
 
-export default useLogin;
+export default useHome;
