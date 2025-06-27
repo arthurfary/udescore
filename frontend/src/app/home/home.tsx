@@ -8,10 +8,6 @@ import Menu from "../../components/menu";
 import useHome from "./home.hook";
 import { COLORS } from "../../constants/colors";
 
-export interface HomeProps {
-  navigation: any;
-}
-
 interface Turma {
   nome: string;
 }
@@ -20,9 +16,9 @@ const turmasDefault: Turma[] = [
   { nome: "React Native Basics" },
   { nome: "JavaScript Essencial" },
   { nome: "UI/UX para Iniciantes" },
-  { nome: "A" },
-  { nome: "B" },
-  { nome: "C" },
+  { nome: "APIs com Node.js, sem usar o ChatGPT" },
+  { nome: "APIs com Node.js" },
+  { nome: "APIs com Node.js" },
 ];
 
 const gradients = [
@@ -55,10 +51,10 @@ const DotPattern = () => (
   </Svg>
 );
 
-const Home: React.FC<HomeProps> = ({ navigation }) => {
+const Home: React.FC = () => {
   const insets = useSafeAreaInsets();
   const [loading, setLoading] = useState(true);
-  const { turmas, handleRequest } = useHome({ navigation, id_aluno: 9 });
+  const { turmas, handleRequest } = useHome({ id_aluno: 9 });
 
   useEffect(() => {
     const fetchTurmas = async () => {
@@ -75,7 +71,7 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
   }, []);
 
   const handlePress = (turma: string) => {
-    navigation.navigate("Login", { turma });
+    alert("Clicou no curso da turma: " + turma);
   };
 
   const turmasToShow = turmas.length > 0 ? turmas : (loading ? [] : turmasDefault);
@@ -112,7 +108,7 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
           </TouchableOpacity>
         ))}
       </ScrollView>
-      <Menu navigation={navigation} />
+      <Menu />
     </>
   );
 };

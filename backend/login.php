@@ -19,7 +19,7 @@ try {
     $senha = $body["senha"];
 
     $usuario = $db->query(
-        "SELECT email, senha FROM usuario WHERE email = ('$email')"
+        "SELECT id, nome, email, senha, tipo FROM usuario WHERE email = ('$email')"
     )[0];
 
     // Aqui você faria uma verificação no banco de dados, por exemplo
@@ -48,6 +48,11 @@ try {
         [
           "message" => "Login realizado com sucesso!",
           "success" => true,
+          "data" => [
+            "id" => $usuario["id"],
+            "nome" => $usuario["nome"],
+            "tipo" => $usuario["tipo"]
+          ]
         ]
     );
 } catch (Exception $e) {

@@ -1,5 +1,6 @@
 import { StyleSheet, TouchableHighlight } from "react-native";
 import { COLORS } from "../../constants/colors";
+import { FONT_SIZES } from "../../constants/font-sizes";
 
 const styles = StyleSheet.create({
   container: {
@@ -9,12 +10,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   buttonText: {
-    fontSize: 12,
+    fontSize: FONT_SIZES.caption,
     color: COLORS.label,
     fontWeight: "bold",
   },
   text: {
-    fontSize: 16,
+    fontSize: FONT_SIZES.body,
     color: COLORS.label,
     marginBottom: 8,
   },

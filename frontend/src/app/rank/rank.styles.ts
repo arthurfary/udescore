@@ -3,75 +3,104 @@ import { COLORS } from "../../constants/colors";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLORS.background,
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: COLORS.background,
+    paddingTop: 100,
+    paddingHorizontal: 16,
   },
-  courseCard: {
-    marginBottom: 20,
-    borderRadius: 20,
-    overflow: "hidden",
-    elevation: 8,
-    shadowColor: "#000",
-    width: "90%",
-    backgroundColor: COLORS.terciary,
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-  },
-  courseBackground: {
-    height: 140,
-    width: "100%",
-    position: "relative",
-    justifyContent: "flex-end",
-    borderRadius: 20,
-  },
-  courseLabel: {
-    display: "flex",
+  rankItem: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 16,
+    marginBottom: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 12,
   },
-  myLabel: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 16,
-    backgroundColor: COLORS.quaternary,
+
+  userHighlight: {
+    backgroundColor: "#ffffff10", // leve destaque
+    borderColor: "#00ffcc",
+    borderWidth: 1,
   },
-  position: {
-    color: "#ffffff",
-    fontSize: 24,
+
+  positionText: {
+    fontSize: 18,
     fontWeight: "bold",
+    minWidth: 32,
     textAlign: "center",
-    width: 50,
+    alignSelf: "center",
   },
-  courseName: {
-    color: "#ffffff",
+
+  avatarPlaceholder: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: "#fff",
+  },
+
+  nameText: {
+    color: "#fff",
     fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
-    letterSpacing: 0.5,
+    fontWeight: "500",
   },
-  coursePoints: {
-    color: "#ffffff",
+
+  userNameText: {
+    fontWeight: "bold",
+    color: "#00ffcc",
+  },
+
+  pointsText: {
+    color: "#fff",
     fontSize: 14,
-    textAlign: "center",
+    fontWeight: "600",
+  },
+
+  userPointsText: {
+    color: "#00ffcc",
   },
   title: {
-    color: COLORS.text,
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: "bold",
-    marginBottom: 40,
+    color: "#fff",
     textAlign: "center",
-    width: "100%",
-    paddingHorizontal: 16,
+    marginBottom: 32,
+    fontFamily: "serif",
+  },
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
+    paddingBottom: 100,
+  },
+  left: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
+  medalIcon: {
+    width: 20,
+    height: 20,
+    resizeMode: "contain",
+    marginRight: 2,
+  },
+  separator: {
+    alignItems: "center",
+    marginVertical: 16,
+  },
+  separatorLine: {
+    height: 1,
+    backgroundColor: "#fff",
+    width: "80%",
+    opacity: 0.3,
+  },
+  avatarIcon: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

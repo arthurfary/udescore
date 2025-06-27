@@ -1,13 +1,9 @@
 import React from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, Text, View, FlatList } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styles from "./rank.styles";
 import Menu from "../../components/menu";
-import { COLORS } from "../../constants/colors";
-
-export interface RankProps {
-  navigation: any;
-}
+import { FontAwesome } from "@expo/vector-icons";
 
 const top10 = [
   { nome: "OOOOOOOOOOOOOOO", pontos: 100 },
@@ -50,104 +46,119 @@ const meuRanking = [
   },
 ];
 
-const Rank: React.FC<RankProps> = ({ navigation }) => {
-  const insets = useSafeAreaInsets();
+interface RankItem {
+  position: number;
+  nome: string;
+  pontos: number;
+  isUser?: boolean;
+}
 
+const Rank: React.FC = () => {
+  const insets = useSafeAreaInsets();
   const meuRank = meuRanking[2];
 
-  // Combina todos os ranks (com posição explícita)
   const rankingCompleto = [
     ...top10.map((item, index) => ({ ...item, position: index + 1 })),
     ...meuRanking,
   ];
 
-  // Evita duplicação do usuário
   const filtrado = rankingCompleto.filter(
     (aluno, index, self) =>
       index === self.findIndex((a) => a.position === aluno.position)
   );
 
-  // Lógica para mostrar ao redor do usuário
   let extraRanking: typeof meuRanking = [];
   if (meuRank) {
     const pos = meuRank.position;
-
     extraRanking = filtrado.filter((aluno) => {
-      // Sempre mostrar o próprio
       if (aluno.nome === meuRank.nome && meuRank.position > 10) return true;
-
-      // Mostrar 2 atrás, se posição < 10
       if (
         (aluno.position == pos + 1 || aluno.position == pos + 2) &&
         aluno.position > 10
-      ) {
+      )
         return true;
-      }
-      // Mostrar 2 à frente, apenas se posição > 10
       if (
         (aluno.position == pos - 1 || aluno.position == pos - 2) &&
         aluno.position > 10
-      ) {
+      )
         return true;
-      }
-
       return false;
     });
-
-    // Ordenar por posição crescente
     extraRanking.sort((a, b) => a.position - b.position);
   }
 
+  const positionColors: { [key: number]: string } = {
+    1: "#FFD700",
+    2: "#C0C0C0",
+    3: "#CD7F32",
+  };
+
+  const renderRankItem = ({ item }: { item: RankItem }) => {
+    const color = positionColors[item.position] || "#FFFFFF";
+
+    return (
+      <View style={[styles.rankItem, item.isUser && styles.userHighlight]}>
+        <View style={styles.left}>
+          <Text style={[styles.positionText, { color }]}>{item.position}</Text>
+          <View style={styles.avatarIcon}>
+            <FontAwesome name="user" size={20} color="#000" />
+          </View>
+          <Text style={[styles.nameText, item.isUser && styles.userNameText]}>
+            {item.nome}
+          </Text>
+        </View>
+        <Text style={[styles.pointsText, item.isUser && styles.userPointsText]}>
+          {item.pontos} XP
+        </Text>
+      </View>
+    );
+  };
+
+  const top10Data = top10.map((item, index) => ({
+    ...item,
+    position: index + 1,
+    isUser: item.nome === meuRank.nome,
+  }));
+
+  const extraData = extraRanking.map((item) => ({
+    ...item,
+    isUser: item.nome === meuRank.nome,
+  }));
+
   return (
     <>
-      <ScrollView
-        contentContainerStyle={{
-          padding: 16,
-          paddingBottom: 100 + insets.bottom,
-          paddingTop: 100 + insets.top,
-          width: "100%",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        style={{ flex: 1, backgroundColor: COLORS.background }}
-      >
+      <View style={styles.container}>
         <Text style={styles.title}>Ranking</Text>
 
-        {/* Top 10 sempre */}
-        {top10.map((aluno, index) => {
-          const isUser = aluno.nome === meuRank.nome;
-          return (
-            <TouchableOpacity key={index} style={styles.courseCard}>
-              <View style={isUser ? styles.myLabel : styles.courseLabel}>
-                <Text style={styles.position}>{"#" + (index + 1)}</Text>
-                <Text style={styles.courseName}>{aluno.nome}</Text>
-                <Text style={styles.coursePoints}>{aluno.pontos} Pts</Text>
-              </View>
-            </TouchableOpacity>
-          );
-        })}
+        <ScrollView
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollContent}
+        >
+          <FlatList
+            data={top10Data}
+            renderItem={renderRankItem}
+            keyExtractor={(item) => `top10-${item.position}`}
+            scrollEnabled={false}
+          />
 
-        <>
-          <View style={{ marginTop: 24, width: "100%" }} />
-          {extraRanking.map((aluno, index) => (
-            <TouchableOpacity key={index} style={styles.courseCard}>
-              <View
-                style={
-                  aluno.nome === meuRank.nome
-                    ? styles.myLabel
-                    : styles.courseLabel
-                }
-              >
-                <Text style={styles.position}>{"#" + aluno.position}</Text>
-                <Text style={styles.courseName}>{aluno.nome}</Text>
-                <Text style={styles.coursePoints}>{aluno.pontos} Pts</Text>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </>
-      </ScrollView>
-      <Menu navigation={navigation} />
+          {extraData.length > 0 && (
+            <View style={styles.separator}>
+              <View style={styles.separatorLine} />
+            </View>
+          )}
+
+          <FlatList
+            data={extraData}
+            renderItem={renderRankItem}
+            keyExtractor={(item) => `extra-${item.position}`}
+            scrollEnabled={false}
+          />
+        </ScrollView>
+      </View>
+
+      <Menu />
     </>
   );
 };
+
 export default Rank;
