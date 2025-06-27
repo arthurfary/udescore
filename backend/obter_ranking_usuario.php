@@ -22,7 +22,7 @@ try {
                 GROUP BY questionario_aluno.id_aluno, usuario.nome
             ),
             posicao_aluno AS (
-                SELECT posicao As position FROM ranking WHERE id_aluno = :id_aluno
+                SELECT position FROM ranking WHERE id_aluno = :id_aluno
             )
             SELECT * FROM ranking
             WHERE position BETWEEN (SELECT position FROM posicao_aluno) - 2 
