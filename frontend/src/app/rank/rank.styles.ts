@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { COLORS } from "../../constants/colors";
+import { FONT_SIZES } from "../../constants/font-sizes";
 
 const styles = StyleSheet.create({
   container: {
@@ -10,11 +11,11 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 24,
+    fontSize: FONT_SIZES.heading,
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 20,
-    color: COLORS.text || "#FFFFFF",
+    color: COLORS.text,
   },
 
   scrollView: {
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
   },
 
   position: {
-    fontSize: 16,
+    fontSize: FONT_SIZES.body,
     fontWeight: "bold",
     width: 50,
     textAlign: "center",
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
 
   name: {
     flex: 1,
-    fontSize: 16,
+    fontSize: FONT_SIZES.body,
     fontWeight: "500",
     marginLeft: 16,
   },
@@ -69,15 +70,15 @@ const styles = StyleSheet.create({
   // Estilo especial para destacar o nome do usuário
   userName: {
     fontWeight: "bold",
-    fontSize: 18,
-    color: "#FFFFFF",
+    fontSize: FONT_SIZES.subtitle,
+    color: COLORS.text,
     textShadowColor: "rgba(0, 122, 255, 0.8)",
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 2,
   },
 
   points: {
-    fontSize: 14,
+    fontSize: FONT_SIZES.caption,
     fontWeight: "bold",
     textAlign: "right",
     minWidth: 60,
@@ -117,19 +118,19 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#007AFF",
+    borderColor: COLORS.border,
   },
 
   courseName: {
     flex: 1,
-    fontSize: 16,
-    color: "#FFFFFF",
+    fontSize: FONT_SIZES.body,
+    color: COLORS.text,
     marginLeft: 8,
   },
 
   coursePoints: {
-    fontSize: 14,
-    color: "#FFFFFF",
+    fontSize: FONT_SIZES.caption,
+    color: COLORS.text,
     fontWeight: "bold",
   },
 });

@@ -11,7 +11,7 @@ const turmas = [
   { nome: "React Native Basics" },
   { nome: "JavaScript Essencial" },
   { nome: "UI/UX para Iniciantes" },
-  { nome: "APIs com Node.js" },
+  { nome: "APIs com Node.js, sem usar o ChatGPT" },
   { nome: "APIs com Node.js" },
   { nome: "APIs com Node.js" },
 ];
