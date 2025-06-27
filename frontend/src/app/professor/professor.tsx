@@ -10,7 +10,9 @@ import useHooks from "./professor.hook";
 const Professor: React.FC<{ navigation: any }> = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const { user } = useAuth();
-  const { logout, redirectRank } = useHooks({ navigation });
+  const { logout, redirectRank, redirectTurmas, redirectCriarTurma } = useHooks(
+    { navigation }
+  );
 
   return (
     <ScrollView
@@ -41,12 +43,16 @@ const Professor: React.FC<{ navigation: any }> = ({ navigation }) => {
 
       <TouchableOpacity style={styles.button}>
         <MaterialIcons name="school" size={16} color="#fff" />
-        <Text style={styles.buttonText}>Turmas</Text>
+        <Text style={styles.buttonText} onPress={redirectTurmas}>
+          Turmas
+        </Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button}>
         <Entypo name="plus" size={16} color="#fff" />
-        <Text style={styles.buttonText}>Criar nova turma</Text>
+        <Text style={styles.buttonText} onPress={redirectCriarTurma}>
+          Criar nova turma
+        </Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.exitButton}>

@@ -12,10 +12,20 @@ const useHooks = ({ navigation }: any) => {
     navigation.navigate("RankProfessor");
   };
 
+  const redirectTurmas = async () => {
+    navigation.navigate("ProfessorTurmas");
+  };
+
+  const redirectCriarTurma = async () => {
+    navigation.navigate("CriarTurma");
+  };
+
   // Add your business logic here
   return {
     logout,
     redirectRank,
+    redirectTurmas,
+    redirectCriarTurma,
   };
 };
 
