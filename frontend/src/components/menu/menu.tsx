@@ -11,7 +11,7 @@ import { RootStackParamList } from "../../../App";
 const Menu: React.FC = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>(); // pega o navigation do contexto
   const insets = useSafeAreaInsets();
-  const { handlePressHome, handlePressRank, handlePressPerfil } = useMenu({
+  const { activePage, handlePressHome, handlePressRank, handlePressPerfil } = useMenu({
     navigation,
   });
 
@@ -25,13 +25,13 @@ const Menu: React.FC = () => {
       ]}
     >
       <TouchableOpacity style={styles.menuItem} onPress={handlePressHome}>
-        <Ionicons name="home-outline" size={28} color="#FFF" />
+        <Ionicons name={activePage === "Home" ? "home" : "home-outline"} size={28} color="#FFF" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.menuItem} onPress={handlePressRank}>
-        <Ionicons name="trophy-outline" size={28} color="#FFF" />
+        <Ionicons name={activePage === "Rank" ? "trophy" : "trophy-outline"} size={28} color="#FFF" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.menuItem} onPress={handlePressPerfil}>
-        <Ionicons name="person-outline" size={28} color="#FFF" />
+        <Ionicons name={activePage === "Perfil" ? "person" : "person-outline"} size={28} color="#FFF" />
       </TouchableOpacity>
     </View>
   );

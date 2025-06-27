@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const useMenu = ({ navigation }: { navigation: any }) => {
   const handlePressHome = () => {
     navigation.navigate("Home");
@@ -9,7 +11,9 @@ const useMenu = ({ navigation }: { navigation: any }) => {
     navigation.navigate("Perfil");
   };
 
-  return { handlePressHome, handlePressRank, handlePressPerfil };
+  const activePage = navigation.getState()?.routes[navigation.getState()?.index]?.name || "Home";
+
+  return { activePage, handlePressHome, handlePressRank, handlePressPerfil };
 };
 
 export default useMenu;
